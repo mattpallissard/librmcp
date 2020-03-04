@@ -124,7 +124,7 @@ void udp(uint8_t *d, uint8_t *r)
 
 	s.sin_family = AF_INET;
 	s.sin_port = htons(RMCP_PORT_CLEAR);
-	s.sin_addr.s_addr = inet_addr("192.168.1.16");
+	s.sin_addr.s_addr = inet_addr("ip.add.re.ss");
 	l = sizeof(s);
 
 	if ((connect(fd, (struct sockaddr *)&s, l) < 0) || errno)
