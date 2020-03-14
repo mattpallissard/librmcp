@@ -1,9 +1,10 @@
 =======
-librmpc
+librmcp
 =======
 
 an rmpc library based on the IPMI 2.0 spec.
 
+questions, comments, and PR's can be emailed to rmcp a_t pallissard D0T net
 
 status
 ======
