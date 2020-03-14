@@ -83,6 +83,15 @@ void asf_header_unpack(uint8_t *d, struct asf_header *a)
 	asf_msg_header_unpack_data_length(d, a);
 }
 
+void asf_data_unpack(uint8_t *d, struct asf_data *a)
+{
+	asf_msg_data_unpack_iana(d, a);
+	asf_msg_data_unpack_oem(d, a);
+	asf_msg_data_unpack_supported_entities(d, a);
+	asf_msg_data_unpack_supported_interactions(d, a);
+
+}
+
 void rmcp_header_print(struct rmcp_header *r)
 {
 	printf("rmcp version:   %u\n", rmcp_msg_header_get_version(r));
@@ -99,6 +108,17 @@ void asf_header_print(struct asf_header *a)
 	printf("asf tag:        %u\n", asf_msg_header_get_tag(a));
 	printf("asf reserved:   %u\n", asf_msg_header_get_reserved(a));
 	printf("asf length:     %u\n", asf_msg_header_get_length(a));
+}
+
+void asf_data_print(struct asf_data *a)
+{
+	printf("asf iana:	%u\n", asf_msg_data_get_iana(a));
+	printf("asf oem:	%u\n", asf_msg_data_get_oem(a));
+	printf("asf ipmi:	%u\n", asf_msg_data_get_supported_entities_ipmi(a));
+	printf("asf version:	%u\n", asf_msg_data_get_supported_entities_version(a));
+	printf("asf security:	%u\n", asf_msg_data_get_supported_interactions_security(a));
+	printf("asf dash:	%u\n", asf_msg_data_get_supported_interactions_dash(a));
+
 }
 
 void ping_print(uint8_t *d)
@@ -124,7 +144,7 @@ void udp(uint8_t *d, uint8_t *r)
 
 	s.sin_family = AF_INET;
 	s.sin_port = htons(RMCP_PORT_CLEAR);
-	s.sin_addr.s_addr = inet_addr("ip.add.re.ss");
+	s.sin_addr.s_addr = inet_addr("192.168.1.16");
 	l = sizeof(s);
 
 	if ((connect(fd, (struct sockaddr *)&s, l) < 0) || errno)
@@ -133,7 +153,7 @@ void udp(uint8_t *d, uint8_t *r)
 	if ((sendto(fd, d, ASF_MSG_PING_LEN, 0, (struct sockaddr *)NULL, l) < 0) || errno)
 		goto out;
 
-	if ((recvfrom(fd, r, ASF_MSG_PING_LEN, 0, (struct sockaddr *)NULL, NULL) < 0) || errno)
+	if ((recvfrom(fd, r, LONGEST, 0, (struct sockaddr *)NULL, NULL) < 0) || errno)
 		goto out;
 
 	return;
@@ -150,6 +170,7 @@ void req()
 
 	struct rmcp_header rs;
 	struct asf_header as;
+	struct asf_data ad;
 	uint8_t d[ASF_MSG_PING_LEN];
 	uint8_t ds[LONGEST];
 	memset(d, '\0', ASF_MSG_PING_LEN);
@@ -162,6 +183,7 @@ void req()
 	rmcp_header_print(&r);
 	asf_header_print(&a);
 
+
 	rmcp_header_pack(d, &r);
 	asf_header_pack(d, &a);
 
@@ -169,10 +191,14 @@ void req()
 
 	rmcp_header_unpack(ds, &rs);
 	asf_header_unpack(ds, &as);
+	asf_data_unpack(ds, &ad);
 
 	printf("\nRECIEVED\n");
+	printf("\nheader\n\n");
 	rmcp_header_print(&rs);
 	asf_header_print(&as);
+	printf("\ndata\n\n");
+	asf_data_print(&ad);
 }
 
 int main(void)
