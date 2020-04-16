@@ -23,6 +23,7 @@ SOFTWARE.
 #include <stdlib.h>
 
 enum {
+
 	/*
 	*  network and session stuff
 	*/
@@ -36,8 +37,8 @@ enum {
 enum {
 
 	/*
-	 *  rmcp header
-	 */
+	*  rmcp header
+	*/
 	RMCP_MSG_HEADER_CLASS_ASF = 6,
 	RMCP_MSG_HEADER_CLASS_IPMI = 7,
 	RMCP_MSG_HEADER_CLASS_OEM = 8,
@@ -54,11 +55,12 @@ enum {
 };
 
 enum {
+
 	/*
-	 * asf header
-	 * there isn't an asf header defined in the spec. we've just separated
-	 * the data from the rest of the message.
-	 */
+	* asf header
+	* there isn't an asf header defined in the spec. we've just separated
+	* the data from the rest of the message.
+	*/
 
 	ASF_MSG_HEADER_IANA_OFFSET = RMCP_MSG_HEADER_CLASS_OFFSET + RMCP_MSG_HEADER_CLASS_SIZE,
 	ASF_MSG_HEADER_IANA_SIZE = sizeof(uint32_t),
@@ -75,11 +77,12 @@ enum {
 };
 
 enum {
+
 	/*
-	 * asf data
-	 * as stated above, there isn't an asf data defined in the spec.  We just use
-	 * this for the payload.
-	 */
+	* asf data
+	* as stated above, there isn't an asf data defined in the spec.  We just use
+	* this for the payload.
+	*/
 
 	ASF_MSG_DATA_IANA_OFFSET = ASF_MSG_HEADER_DATA_LEN_OFFSET + ASF_MSG_HEADER_DATA_LEN_SIZE,
 	ASF_MSG_DATA_IANA_SIZE = sizeof(uint32_t),
@@ -95,11 +98,44 @@ enum {
 	LONGEST = ASF_MSG_DATA_RESERVED_DATA_OFFSET + ASF_MSG_DATA_RESERVED_DATA_SIZE,
 };
 
+
+enum {
+
+	/*
+	* rcmp open session request data
+	*/
+
+	RMCP_SESSION_REQUEST_MESSAGE_TAG_OFFSET = 0,
+	RMCP_SESSION_REQUEST_MESSAGE_TAG_SIZE = sizeof(uint8_t),
+	RMCP_SESSION_REQUEST_MAX_PRIV_LEVEL_OFFSET = RMCP_SESSION_REQUEST_MESSAGE_TAG_OFFSET + RMCP_SESSION_REQUEST_MESSAGE_TAG_SIZE,
+	RMCP_SESSION_REQUEST_MAX_PRIV_LEVEL_SIZE = sizeof(uint8_t),
+	RMCP_SESSION_REQUEST_RESERVED_OFFSET = RMCP_SESSION_REQUEST_MAX_PRIV_LEVEL_OFFSET + RMCP_SESSION_REQUEST_MAX_PRIV_LEVEL_SIZE,
+	RMCP_SESSION_REQUEST_RESERVED_SIZE = sizeof(uint16_t),
+	RMCP_SESSION_REQUEST_SESSION_ID_OFFSET = RMCP_SESSION_REQUEST_RESERVED_OFFSET + RMCP_SESSION_REQUEST_RESERVED_SIZE,
+	RMCP_SESSION_REQUEST_SESSION_ID_SIZE = sizeof(uint32_t),
+	RMCP_SESSION_REQUEST_AUTHENTICATION_PAYLOAD_OFFSET = RMCP_SESSION_REQUEST_RESERVED_SIZE + RMCP_SESSION_REQUEST_SESSION_ID_OFFSET,
+	RMCP_SESSION_REQUEST_AUTHENTICATION_PAYLOAD_SIZE = sizeof(uint64_t),
+	RMCP_SESSION_REQUEST_INTEGRITY_PAYLOAD_OFFSET = RMCP_SESSION_REQUEST_AUTHENTICATION_PAYLOAD_OFFSET + RMCP_SESSION_REQUEST_AUTHENTICATION_PAYLOAD_SIZE,
+	RMCP_SESSION_REQUEST_INTEGRITY_PAYLOAD_SIZE = sizeof(uint64_t), 
+	RMCP_SESSION_REQUEST_CONFIDENTIALITY_PAYLOAD = RMCP_SESSION_REQUEST_INTEGRITY_PAYLOAD_OFFSET + RMCP_SESSION_REQUEST_INTEGRITY_PAYLOAD_SIZE,
+};
+
+
 struct rmcp_header {
 	uint8_t version;
 	uint8_t reserved;
 	uint8_t sequence_number;
 	uint8_t message_class;
+};
+
+struct rmcp_session_request {
+	uint8_t message_tag;
+	uint8_t max_privilege_level;
+	uint16_t reserved;
+	uint32_t session_id;
+	uint64_t authentication_payload;
+	uint64_t integrity_payload;
+	uint64_t confidentiality_payload;
 };
 
 struct asf_header {

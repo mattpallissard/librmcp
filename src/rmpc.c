@@ -405,6 +405,76 @@ void rmcp_msg_header_unpack_message_class(uint8_t *d, struct rmcp_header *r)
 {
 	r->message_class = unpackr(&(d)[RMCP_MSG_HEADER_CLASS_OFFSET], RMCP_MSG_HEADER_CLASS_SIZE);
 }
+void rmcp_session_request_set_message_tag(struct rmcp_session_request *r, uint8_t i)
+{
+	r->message_tag = i;
+}
+void rmcp_session_request_set_privilege_level_reserved(struct rmcp_session_request *r)
+{
+	r->max_privilege_level &= 16;
+}
+
+void rmcp_session_request_set_privilege_level_request(struct rmcp_session_request *r, uint8_t i)
+{
+	r->max_privilege_level |= i & 16;
+}
+
+void rmcp_session_request_set_reserved(struct rmcp_session_request *r, uint8_t i)
+{
+	r->reserved = i;
+}
+
+void rmcp_session_set_session_id(struct rmcp_session_request *r, uint32_t i)
+{
+	r->session_id = i;
+}
+
+void rmcp_session_set_authentication_payload_type(struct rmcp_session_request *r, uint8_t i)
+{
+	/*
+	* authentication algorithm = 00h
+	*/
+
+	// 2^64-1
+	r->authentication_payload &= 9223372036854775807;
+	r->authentication_payload |= (uint64_t)i << 56;
+}
+
+void rmcp_session_set_authentication_payload_reserved(struct rmcp_session_request *r, uint16_t i)
+{
+	/*
+	*  reserved = 00h
+	*/
+	// (2^64-1)-(2^56-1)+(2^40-1)
+	r->authentication_payload &= 9187343789591625727;
+	r->authentication_payload |= (uint64_t)i << 48;
+
+}
+
+void rmcp_session_set_authentication_payload_length(struct rmcp_session_request *r, uint8_t i)
+{
+	/*
+	* total length of the payload including this header
+	* 08h for this spec
+	*/
+	// (2^64-1)-(2^40-1)+(2^32-1)
+	r->authentication_payload &= 9223371489246445567;
+	r->authentication_payload |= (uint64_t)i << 40;
+}
+
+void rmcp_session_set_authentication_payload_algorithm(struct rmcp_session_request *r,  uint8_t i)
+{
+	// (2^64-1)-(2^32-1)+(2^24-1)
+	r->authentication_payload &= 9223372034715680767;
+	r->authentication_payload |= (uint64_t)i << 32;
+
+}
+
+void rmcp_session_set_integrity_payload(struct rmcp_session_request *r, uint64_t i)
+{
+	r->integrity_payload = i;
+}
+
 
 void rmcp_ping_set()
 {
