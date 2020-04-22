@@ -42,8 +42,7 @@ uint8_t date;
 const char *label[] = { "emerge", "alert", "crit", "err", "warning", "notice", "info", "debug" };
 
 const char *color[] = {
-	"\x1b[35m", "\x1b[31m", "\x1b[31m", "\x1b[31m", "\x1b[33m",
-	"\x1b[32m", "\x1b[36m", "\x1b[94m", "\x1b[94m", "\x1b[94m",
+	"\x1b[35m", "\x1b[31m", "\x1b[31m", "\x1b[31m", "\x1b[33m", "\x1b[32m", "\x1b[36m", "\x1b[94m", "\x1b[94m", "\x1b[94m",
 };
 const char *color_reset = "\x1b[0m";
 

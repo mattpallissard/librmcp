@@ -448,7 +448,6 @@ void rmcp_session_request_set_authentication_payload_reserved23(struct rmcp_sess
 	// (2^64-1)-(2^56-1)+(2^40-1)
 	r->authentication_payload &= 9187343789591625727;
 	// r->authentication_payload |= (uint64_t)i << 48;
-
 }
 
 void rmcp_session_request_set_authentication_payload_length(struct rmcp_session_request *r, uint8_t i)
@@ -462,12 +461,11 @@ void rmcp_session_request_set_authentication_payload_length(struct rmcp_session_
 	r->authentication_payload |= (uint64_t)i << 40;
 }
 
-void rmcp_session_request_set_authentication_payload_algorithm(struct rmcp_session_request *r,  uint8_t i)
+void rmcp_session_request_set_authentication_payload_algorithm(struct rmcp_session_request *r, uint8_t i)
 {
 	// (2^64-1)-(2^32-1)+(2^24-1)
 	r->authentication_payload &= 9223372034715680767;
 	r->authentication_payload |= (uint64_t)i << 32;
-
 }
 
 void rmcp_session_request_set_authenticaiton_payload_reserved_678(struct rmcp_session_request *r, uint32_t i)
@@ -527,7 +525,6 @@ void rmcp_session_request_set_integrity_payload_algorithm(struct rmcp_session_re
 	*/
 	r->integrity_payload &= 18446744069431361535LU;
 	r->integrity_payload |= (uint64_t)(i & 31) << 24;
-
 }
 
 void rmcp_session_request_set_integrity_payload_reserved_678(struct rmcp_session_request *r, uint32_t i)
@@ -587,7 +584,6 @@ void rmcp_session_request_set_confidentiality_payload_algorithm(struct rmcp_sess
 	*/
 	r->confidentiality_payload &= 18446744069431361535LU;
 	r->confidentiality_payload |= (uint64_t)(i & 31) << 24;
-
 }
 
 void rmcp_session_request_set_confidentiality_payload_reserved_678(struct rmcp_session_request *r, uint32_t i)

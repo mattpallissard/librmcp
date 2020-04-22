@@ -10,7 +10,6 @@ enum {
 	IPMI_AUTH_FORMAT = 6,
 };
 
-
 enum {
 	// roles (privilege level)
 	IPMI_ROLE_HIGHEST = 0,
@@ -34,7 +33,6 @@ enum {
 	IPMI_PAYLOAD_NUM_RAKP_4 = 21,
 	// 20-> 27 OEM
 };
-
 
 enum {
 	// algo numbers

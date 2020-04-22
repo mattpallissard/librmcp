@@ -89,7 +89,6 @@ void asf_data_unpack(uint8_t *d, struct asf_data *a)
 	asf_msg_data_unpack_oem(d, a);
 	asf_msg_data_unpack_supported_entities(d, a);
 	asf_msg_data_unpack_supported_interactions(d, a);
-
 }
 
 void rmcp_header_print(struct rmcp_header *r)
@@ -118,7 +117,6 @@ void asf_data_print(struct asf_data *a)
 	printf("asf version:	%u\n", asf_msg_data_get_supported_entities_version(a));
 	printf("asf security:	%u\n", asf_msg_data_get_supported_interactions_security(a));
 	printf("asf dash:	%u\n", asf_msg_data_get_supported_interactions_dash(a));
-
 }
 
 void ping_print(uint8_t *d)
@@ -182,7 +180,6 @@ void req()
 	printf("SENT\n");
 	rmcp_header_print(&r);
 	asf_header_print(&a);
-
 
 	rmcp_header_pack(d, &r);
 	asf_header_pack(d, &a);
