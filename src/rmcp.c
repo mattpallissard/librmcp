@@ -405,31 +405,131 @@ void rmcp_msg_header_unpack_message_class(uint8_t *d, struct rmcp_header *r)
 {
 	r->message_class = unpackr(&(d)[RMCP_MSG_HEADER_CLASS_OFFSET], RMCP_MSG_HEADER_CLASS_SIZE);
 }
-void rmcp_session_request_set_message_tag(struct rmcp_session_request *r, uint8_t i)
+
+uint8_t rmcp_session_get_message_tag(struct rmcp_session *r)
+{
+	return r->message_tag;
+}
+
+uint8_t rmcp_session_get_privilege_level_reserved(struct rmcp_session *r)
+{
+	return (r->max_privilege_level & 240) >> 4;
+}
+
+uint8_t rmcp_session_get_privilege_level_request(struct rmcp_session *r)
+{
+	return r->max_privilege_level & 16;
+}
+
+uint32_t rmcp_session_get_session_id(struct rmcp_session *r)
+{
+	return r->session_id;
+}
+
+uint8_t rmcp_session_get_authentication_payload_type(struct rmcp_session *r)
+{
+	/*
+	* (2^64-1)-(2^56-1)
+	*/
+	return (r->authentication_payload & 18374686479671623680LU) >> 56;
+}
+
+uint16_t rmcp_session_get_authenticaion_payload_reserved23(struct rmcp_session *r)
+{
+	/*
+	* (2^56-1)-(2^40-1)
+	*/
+	return (r->authentication_payload & 72056494526300160LU >> 40);
+}
+uint8_t rmcp_session_get_authentication_payload_length(struct rmcp_session *r)
+{
+	/*
+	* (2^40-1)-(2^32-1)
+	*/
+	return (r->authentication_payload & 1095216660480) >> 32;
+}
+
+uint8_t rmcp_session_get_authenticaiton_payload_algorithm(struct rmcp_session *r)
+{
+	/*
+	* (2^32-1)-(2^24-1)
+	*/
+	return (r->authentication_payload & 4278190080) >> 24;
+}
+
+uint32_t rmcp_session_get_authentication_payload_reserved_678(struct rmcp_session *r)
+{
+	/*
+	* 2^24-1
+	*/
+	return r->authentication_payload & 16777215;
+}
+
+uint8_t rmcp_session_get_confidentiality_payload_type(struct rmcp_session *r)
+{
+	/*
+	* (2^64-1)-(2^56-1)
+	*/
+	return (r->confidentiality_payload & 18374686479671623680LU) >> 56;
+}
+
+uint16_t rmcp_session_get_confidentiality_payload_reserved23(struct rmcp_session *r)
+{
+	/*
+	* (2^56-1)-(2^40-1)
+	*/
+	return (r->confidentiality_payload & 72056494526300160LU >> 40);
+}
+uint8_t rmcp_session_get_confidentiality_payload_length(struct rmcp_session *r)
+{
+	/*
+	* (2^40-1)-(2^32-1)
+	*/
+	return (r->confidentiality_payload & 1095216660480) >> 32;
+}
+
+uint8_t rmcp_session_get_confidentiality_payload_algorithm(struct rmcp_session *r)
+{
+	/*
+	* (2^32-1)-(2^24-1)
+	*/
+	return (r->confidentiality_payload & 4278190080) >> 24;
+}
+
+uint32_t rmcp_session_get_confidentiality_payload_reserved_678(struct rmcp_session *r)
+{
+	/*
+	* 2^24-1
+	*/
+	return r->confidentiality_payload & 16777215;
+}
+
+void rmcp_session_set_message_tag(struct rmcp_session *r, uint8_t i)
 {
 	r->message_tag = i;
 }
-void rmcp_session_request_set_privilege_level_reserved(struct rmcp_session_request *r)
+
+void rmcp_session_set_privilege_level_reserved(struct rmcp_session *r)
 {
-	r->max_privilege_level &= 16;
+	r->max_privilege_level &= 15;
 }
 
-void rmcp_session_request_set_privilege_level_request(struct rmcp_session_request *r, uint8_t i)
+void rmcp_session_set_privilege_level_request(struct rmcp_session *r, uint8_t i)
 {
 	r->max_privilege_level |= i & 16;
 }
 
-void rmcp_session_request_set_reserved(struct rmcp_session_request *r, uint8_t i)
+void rmcp_session_set_reserved(struct rmcp_session *r, uint8_t i)
 {
 	r->reserved = i;
 }
 
-void rmcp_session_request_set_session_id(struct rmcp_session_request *r, uint32_t i)
+void rmcp_session_set_session_id(struct rmcp_session *r, uint32_t i)
 {
 	r->session_id = i;
 }
 
-void rmcp_session_request_set_authentication_payload_type(struct rmcp_session_request *r, uint8_t i)
+void rmcp_session_set_authentication_payload_type(struct rmcp_session *r, uint8_t i)
 {
 	/*
 	* authentication algorithm = 00h
@@ -440,7 +540,7 @@ void rmcp_session_request_set_authentication_payload_type(struct rmcp_session_re
 	r->authentication_payload |= (uint64_t)i << 56;
 }
 
-void rmcp_session_request_set_authentication_payload_reserved23(struct rmcp_session_request *r, uint16_t i)
+void rmcp_session_set_authentication_payload_reserved23(struct rmcp_session *r, uint16_t i)
 {
 	/*
 	*  reserved = 00h
@@ -450,7 +550,7 @@ void rmcp_session_request_set_authentication_payload_reserved23(struct rmcp_sess
 	// r->authentication_payload |= (uint64_t)i << 48;
 }
 
-void rmcp_session_request_set_authentication_payload_length(struct rmcp_session_request *r, uint8_t i)
+void rmcp_session_set_authentication_payload_length(struct rmcp_session *r, uint8_t i)
 {
 	/*
 	* total length of the payload including this header
@@ -461,14 +561,14 @@ void rmcp_session_request_set_authentication_payload_length(struct rmcp_session_
 	r->authentication_payload |= (uint64_t)i << 40;
 }
 
-void rmcp_session_request_set_authentication_payload_algorithm(struct rmcp_session_request *r, uint8_t i)
+void rmcp_session_set_authentication_payload_algorithm(struct rmcp_session *r, uint8_t i)
 {
 	// (2^64-1)-(2^32-1)+(2^24-1)
 	r->authentication_payload &= 9223372034715680767;
 	r->authentication_payload |= (uint64_t)i << 32;
 }
 
-void rmcp_session_request_set_authenticaiton_payload_reserved_678(struct rmcp_session_request *r, uint32_t i)
+void rmcp_session_set_authenticaiton_payload_reserved_678(struct rmcp_session *r, uint32_t i)
 {
 	/*
 	* reserved bytes 6-8
@@ -479,7 +579,7 @@ void rmcp_session_request_set_authenticaiton_payload_reserved_678(struct rmcp_se
 	// r->integrity_payload |= (i & 16777215);
 };
 
-void rmcp_session_request_set_integrity_payload_type(struct rmcp_session_request *r, uint8_t i)
+void rmcp_session_set_integrity_payload_type(struct rmcp_session *r, uint8_t i)
 {
 	/*
 	* 01h = integrity algorithm
@@ -489,7 +589,7 @@ void rmcp_session_request_set_integrity_payload_type(struct rmcp_session_request
 	r->integrity_payload |= (uint64_t)i << 56;
 }
 
-void rmcp_session_request_set_integrity_payload_reserved_23(struct rmcp_session_request *r, uint16_t i)
+void rmcp_session_set_integrity_payload_reserved_23(struct rmcp_session *r, uint16_t i)
 {
 	/*
 	* reserved bytes 2-3
@@ -502,7 +602,7 @@ void rmcp_session_request_set_integrity_payload_reserved_23(struct rmcp_session_
 	// r->integrity_payload |= (uint64_t)i << 40;
 }
 
-void rmcp_session_request_set_integrity_payload_length(struct rmcp_session_request *r, uint8_t i)
+void rmcp_session_set_integrity_payload_length(struct rmcp_session *r, uint8_t i)
 {
 	/*
 	*  length in bytes of the payload including the header
@@ -513,7 +613,7 @@ void rmcp_session_request_set_integrity_payload_length(struct rmcp_session_reque
 	r->integrity_payload |= (uint64_t)i << 32;
 }
 
-void rmcp_session_request_set_integrity_payload_algorithm(struct rmcp_session_request *r, uint8_t i)
+void rmcp_session_set_integrity_payload_algorithm(struct rmcp_session *r, uint8_t i)
 {
 	/*
 	*
@@ -527,7 +627,7 @@ void rmcp_session_request_set_integrity_payload_algorithm(struct rmcp_session_re
 	r->integrity_payload |= (uint64_t)(i & 31) << 24;
 }
 
-void rmcp_session_request_set_integrity_payload_reserved_678(struct rmcp_session_request *r, uint32_t i)
+void rmcp_session_set_integrity_payload_reserved_678(struct rmcp_session *r, uint32_t i)
 {
 	/*
 	* reserved bytes 6-8
@@ -538,7 +638,7 @@ void rmcp_session_request_set_integrity_payload_reserved_678(struct rmcp_session
 	// r->integrity_payload |= (i & 16777215);
 };
 
-void rmcp_session_request_set_confidentiality_payload_type(struct rmcp_session_request *r, uint8_t i)
+void rmcp_session_set_confidentiality_payload_type(struct rmcp_session *r, uint8_t i)
 {
 	/*
 	* 01h = confidentiality algorithm
@@ -548,7 +648,7 @@ void rmcp_session_request_set_confidentiality_payload_type(struct rmcp_session_r
 	r->confidentiality_payload |= (uint64_t)i << 56;
 }
 
-void rmcp_session_request_set_confidentiality_payload_reserved_23(struct rmcp_session_request *r, uint16_t i)
+void rmcp_session_set_confidentiality_payload_reserved_23(struct rmcp_session *r, uint16_t i)
 {
 	/*
 	* reserved bytes 2-3
@@ -561,7 +661,7 @@ void rmcp_session_request_set_confidentiality_payload_reserved_23(struct rmcp_se
 	// r->confidentiality_payload |= (uint64_t)i << 40;
 }
 
-void rmcp_session_request_set_confidentiality_payload_length(struct rmcp_session_request *r, uint8_t i)
+void rmcp_session_set_confidentiality_payload_length(struct rmcp_session *r, uint8_t i)
 {
 	/*
 	*  length in bytes of the payload including the header
@@ -572,7 +672,7 @@ void rmcp_session_request_set_confidentiality_payload_length(struct rmcp_session
 	r->confidentiality_payload |= (uint64_t)i << 32;
 }
 
-void rmcp_session_request_set_confidentiality_payload_algorithm(struct rmcp_session_request *r, uint8_t i)
+void rmcp_session_set_confidentiality_payload_algorithm(struct rmcp_session *r, uint8_t i)
 {
 	/*
 	*
@@ -586,7 +686,7 @@ void rmcp_session_request_set_confidentiality_payload_algorithm(struct rmcp_sess
 	r->confidentiality_payload |= (uint64_t)(i & 31) << 24;
 }
 
-void rmcp_session_request_set_confidentiality_payload_reserved_678(struct rmcp_session_request *r, uint32_t i)
+void rmcp_session_set_confidentiality_payload_reserved_678(struct rmcp_session *r, uint32_t i)
 {
 	/*
 	* reserved bytes 6-8
@@ -603,7 +703,6 @@ void rmcp_ping_set()
 	rmcp_msg_header_set_version(&r);
 	rmcp_msg_header_set_reserved(&r);
 	rmcp_msg_header_set_sequence(&r, 0);
-	// set 0 to an enum in the header
 	rmcp_msg_header_set_class_type(&r, 0);
 	rmcp_msg_header_set_class_tag(&r, 6);
 }
