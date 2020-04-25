@@ -482,14 +482,14 @@ void t_asf_msg_header_pack_reserved()
 	uint32_t i;
 
 	memset(d, '\0', LONGEST);
-	a.tag = 255;
+	a.reserved = 255;
 
 	printu(LOG_DEBUG, __func__);
 	asf_msg_header_pack_reserved(d, &a);
 	i = unpackl(&(d)[ASF_MSG_HEADER_RESERVED_OFFSET], ASF_MSG_HEADER_RESERVED_SIZE);
 
-	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, a.tag);
-	assert(i == a.tag);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, a.reserved);
+	assert(i == a.reserved);
 }
 
 void t_asf_msg_header_unpack_iana()
@@ -938,6 +938,41 @@ void t_rmcp_msg_header_set_class_type()
 	assert(r.message_class == 64);
 }
 
+void t_rmcp_session_set_message_tag()
+{
+	struct rmcp_session r;
+	r.message_tag = 0;
+	printu(LOG_DEBUG, __func__);
+
+	rmcp_session_set_message_tag(&r, 255);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.message_tag, 255);
+	assert(r.message_tag == 255);
+}
+
+void t_rmcp_session_set_privilege_level_reserved()
+{
+	struct rmcp_session r;
+	r.max_privilege_level = 255;
+	printu(LOG_DEBUG, __func__);
+
+	rmcp_session_set_privilege_level_reserved(&r);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.max_privilege_level, 15);
+	assert(r.max_privilege_level == 15);
+
+}
+
+void t_rmcp_session_set_privilege_level_request()
+{
+	struct rmcp_session r;
+	r.max_privilege_level = 16;
+	printu(LOG_DEBUG, __func__);
+
+	rmcp_session_set_privilege_level_request(&r,);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.max_privilege_level, 15);
+	assert(r.max_privilege_level == 15);
+
+}
+
 void t_unpackl()
 {
 	/*
@@ -1036,6 +1071,9 @@ void test_set_functions()
 	t_rmcp_msg_header_set_sequence();
 	t_rmcp_msg_header_set_class_type();
 	t_rmcp_msg_header_set_class_tag();
+
+	t_rmcp_session_set_message_tag();
+	t_rmcp_session_set_privilege_level_reserved();
 }
 
 void test_get_functions()
@@ -1064,9 +1102,9 @@ void test_get_functions()
 int main(void)
 {
 	setprintmask(LOG_DEBUG);
-	test_set_functions();
 	test_unpack_functions();
 	test_get_functions();
 	test_pack_functions();
+	test_set_functions();
 	return 0;
 }

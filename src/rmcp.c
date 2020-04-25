@@ -273,7 +273,7 @@ void asf_msg_header_pack_tag(uint8_t *d, struct asf_header *a)
 
 void asf_msg_header_pack_reserved(uint8_t *d, struct asf_header *a)
 {
-	packr(&(d)[ASF_MSG_HEADER_RESERVED_OFFSET], a->reserved, ASF_MSG_HEADER_TAG_SIZE);
+	packr(&(d)[ASF_MSG_HEADER_RESERVED_OFFSET], a->reserved, ASF_MSG_HEADER_RESERVED_SIZE);
 }
 
 void asf_msg_header_pack_data_length(uint8_t *d, struct asf_header *a)
