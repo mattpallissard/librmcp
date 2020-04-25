@@ -700,6 +700,8 @@ void rmcp_session_set_confidentiality_payload_reserved_678(struct rmcp_session *
 void rmcp_ping_set()
 {
 	struct rmcp_header r;
+	r.message_class = 0;
+	r.version = 0;
 	rmcp_msg_header_set_version(&r);
 	rmcp_msg_header_set_reserved(&r);
 	rmcp_msg_header_set_sequence(&r, 0);
