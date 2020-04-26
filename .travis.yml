@@ -7,7 +7,7 @@ compiler:
 script:
   - mkdir build
   - pushd build
-  - cmake ..
+  - cmake -DCODE_COVERAGE=ON ..
   - cmake --build .
   - ctest
 env:
