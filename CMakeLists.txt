@@ -25,9 +25,11 @@ if(CODE_COVERAGE)
 endif(CODE_COVERAGE)
 
 add_executable(t_unit src/test.c)
-add_executable(print_ping src/print_ping.c)
+if(WITH_EXAMPLES)
+  add_executable(print_ping src/print_ping.c)
+  target_link_libraries(print_ping rmcp)
+endif(WITH_EXAMPLES)
 
-target_link_libraries(print_ping rmcp)
 target_link_libraries(t_unit rmcp)
 
 enable_testing()
