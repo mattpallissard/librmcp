@@ -7,3 +7,5 @@ script:
   - cmake ..
   - cmake --build .
   - ctest
+
+
