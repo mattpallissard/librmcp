@@ -9,18 +9,12 @@ librmcp
     :target: https://codecov.io/gh/mattpallissard/librmcp
 
 
-
 an rmpc library based on the IPMI 2.0 spec.
 
 questions, comments, and PR's can be emailed to rmcp a_t pallissard D0T net
 
 status
 ======
-
-
-build stuff
-
-
 
 
 Right now all that's working is enough basic functionality to run a `ping`.  see `print_ping.c`
