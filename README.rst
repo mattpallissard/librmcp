@@ -9,7 +9,10 @@ librmcp
     :target: https://codecov.io/gh/mattpallissard/librmcp
 
 .. image:: https://img.shields.io/lgtm/alerts/g/mattpallissard/librmcp.svg?logo=lgtm&logoWidth=18
-    : target: https://lgtm.com/projects/g/mattpallissard/librmcp/alerts/
+    :target: https://lgtm.com/projects/g/mattpallissard/librmcp/alerts/
+
+.. image:: https://img.shields.io/lgtm/grade/cpp/g/mattpallissard/librmcp.svg?logo=lgtm&logoWidth=18
+    :target: https://lgtm.com/projects/g/mattpallissard/librmcp/context:cpp
 
 
 an rmpc library based on the IPMI 2.0 spec.
