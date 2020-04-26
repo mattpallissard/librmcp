@@ -1,3 +1,5 @@
+#ifndef RMCP
+#define RMCP
 /*
 Copyright (c) 2020 matt pallissard
 
@@ -234,3 +236,4 @@ void rmcp_session_set_confidentiality_payload_reserved_23(struct rmcp_session *r
 void rmcp_session_set_confidentiality_payload_length(struct rmcp_session *r, uint8_t i);
 void rmcp_session_set_confidentiality_payload_algorithm(struct rmcp_session *r, uint8_t i);
 void rmcp_session_set_confidentiality_payload_reserved_678(struct rmcp_session *r, uint32_t i);
+#endif
