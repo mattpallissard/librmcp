@@ -1,6 +1,10 @@
 =======
 librmcp
 =======
+
+.. image:: https://travis-ci.org/mattpallissard/librmcp.svg?branch=master
+    :target: https://travis-ci.org/mattpallissard/librmcp
+
 an rmpc library based on the IPMI 2.0 spec.
 
 questions, comments, and PR's can be emailed to rmcp a_t pallissard D0T net
@@ -11,9 +15,6 @@ status
 
 build stuff
 
-.. image:: https://travis-ci.com/mattpallissard/librmcp.svg?branch=master
-
-    :target: https://travis-ci.com/mattpallissard/librmcp
 
 
 
