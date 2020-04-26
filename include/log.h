@@ -23,6 +23,7 @@ SOFTWARE.
 /*
  * yes, is fucking terrible. it's on my todo list.
  */
+#define _POSIX_C_SOURCE 200809L // for gmtime_r
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -53,7 +54,8 @@ const char *color_reset = "\x1b[0m";
 void get_time(char *c_time)
 {
 	time_t t = time(NULL);
-	struct tm *lt = localtime(&t);
+	struct tm *lt = NULL;
+	gmtime_r(&t, lt);
 	int ct = strftime(c_time, 20, "%Y-%m-%d %H:%M:%S", lt);
 	c_time[ct++] = ' ';
 	c_time[ct] = '\0';

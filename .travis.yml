@@ -7,11 +7,15 @@ compiler:
 script:
   - mkdir build
   - pushd build
-  - cmake ..
+  - cmake -DCODE_COVERAGE=ON ..
   - cmake --build .
   - ctest
 env:
   - CODECOV_TOKEN="5f554f97-61fa-4b0d-91cd-29e9f3f426aa"
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - pushd build
+  - curl -s https://codecov.io/bash > codecov.sh
+  - chmod +x codecov.sh
+  - '[[ $TRAVIS_COMPILER != "gcc" ]] && ./codecov.sh -x "llvm-cov gcov"'
+  - '[[ $TRAVIS_COMPILER == "gcc" ]] && ./codecov.sh -x "gcov"'
