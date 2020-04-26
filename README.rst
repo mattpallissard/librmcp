@@ -11,7 +11,17 @@ status
 
 Right now all that's working is enough basic functionality to run a `ping`.  see `print_ping.c`
 
-The first milestone I'm shooting for is a library to link to, send some ipmi data, and poll power information.  We'll see how far it's taken past that point.
+building
+========
+
+.. code:: sh
+
+  mkdir build
+  pushd build
+  cmake ..
+  cmake --build .
+  ctest
+
 
 todo
 ====
