@@ -958,19 +958,220 @@ void t_rmcp_session_set_privilege_level_reserved()
 	rmcp_session_set_privilege_level_reserved(&r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.max_privilege_level, 15);
 	assert(r.max_privilege_level == 15);
-
 }
 
 void t_rmcp_session_set_privilege_level_request()
 {
+	printu(LOG_DEBUG, __func__);
 	struct rmcp_session r;
 	r.max_privilege_level = 16;
+
+	rmcp_session_set_privilege_level_request(&r, 5);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.max_privilege_level & 15, 5);
+	assert((r.max_privilege_level & 15) == 5);
+}
+
+void t_rmcp_session_set_reserved()
+{
 	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	r.reserved = 1;
+	rmcp_session_set_reserved(&r, 0);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.reserved, 0);
+	assert(r.reserved == 0);
+}
 
-	rmcp_session_set_privilege_level_request(&r,);
-	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.max_privilege_level, 15);
-	assert(r.max_privilege_level == 15);
+void t_rmcp_session_set_session_id()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	r.session_id = 1;
+	rmcp_session_set_session_id(&r, 0);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.session_id, 0);
+	assert(r.session_id == 0);
+}
 
+void t_rmcp_session_set_authentication_payload_type()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	//2^64-1
+	r.authentication_payload = 18446744073709551615LU;
+	rmcp_session_set_authentication_payload_type(&r, 8);
+	printu(LOG_DEBUG, "\t\tassert(%lu == %lu)", r.authentication_payload, 648518346341351423);
+	assert(r.authentication_payload == 648518346341351423);
+}
+
+void t_rmcp_session_set_authentication_payload_reserved_23()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	//2^64-1
+	r.authentication_payload = 18446744073709551615LU;
+	// always sets to 0
+	rmcp_session_set_authentication_payload_reserved_23(&r, 256);
+	printu(LOG_DEBUG, "\t\tassert(%lu == %lu)", r.authentication_payload, 18374687579183251455LU);
+	assert(r.authentication_payload == 18374687579183251455LU);
+}
+
+void t_rmcp_session_set_authentication_payload_length()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	//2^64-1
+	r.authentication_payload = 18446744073709551615LU;
+	// does nothing
+	rmcp_session_set_authentication_payload_length(&r, 8);
+	// (2^64-1)-(2^40-1)+(2^35)+(2^32-1)
+	printu(LOG_DEBUG, "\t\tassert(%lu == %lu)", r.authentication_payload, 18446743012852629503LU);
+	assert(r.authentication_payload == 18446743012852629503LU);
+}
+
+void t_rmcp_session_set_authentication_payload_algorithm()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	//2^64-1
+	r.authentication_payload = 18446744073709551615LU;
+	// does nothing
+	rmcp_session_set_authentication_payload_algorithm(&r, 8);
+
+	// (2^64-1)-(2^32-1)+(2^27)+(2^24-1)
+	printu(LOG_DEBUG, "\t\tassert(%lu == %lu)", r.authentication_payload, 18446744069565579263LU);
+	assert(r.authentication_payload == 18446744069565579263LU);
+}
+void t_rmcp_session_set_authentication_payload_reserved_678()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	//2^64-1
+	r.authentication_payload = 18446744073709551615LU;
+	// does nothing
+	rmcp_session_set_authentication_payload_reserved_678(&r, 8);
+	printu(LOG_DEBUG, "\t\tassert(%lu == %lu)", r.authentication_payload, 18446744073692774400LU);
+	assert(r.authentication_payload == 18446744073692774400LU);
+}
+
+void t_rmcp_session_set_integrity_payload_type()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	//2^64-1
+	r.integrity_payload = 18446744073709551615LU;
+	rmcp_session_set_integrity_payload_type(&r, 8);
+	printu(LOG_DEBUG, "\t\tassert(%lu == %lu)", r.integrity_payload, 648518346341351423);
+	assert(r.integrity_payload == 648518346341351423);
+}
+
+void t_rmcp_session_set_integrity_payload_reserved_23()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	//2^64-1
+	r.integrity_payload = 18446744073709551615LU;
+	// always sets to 0
+	rmcp_session_set_integrity_payload_reserved_23(&r, 256);
+	printu(LOG_DEBUG, "\t\tassert(%lu == %lu)", r.integrity_payload, 18374687579183251455LU);
+	assert(r.integrity_payload == 18374687579183251455LU);
+}
+
+void t_rmcp_session_set_integrity_payload_length()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	//2^64-1
+	r.integrity_payload = 18446744073709551615LU;
+	// does nothing
+	rmcp_session_set_integrity_payload_length(&r, 8);
+	// (2^64-1)-(2^40-1)+(2^35)+(2^32-1)
+	printu(LOG_DEBUG, "\t\tassert(%lu == %lu)", r.integrity_payload, 18446743012852629503LU);
+	assert(r.integrity_payload == 18446743012852629503LU);
+}
+
+void t_rmcp_session_set_integrity_payload_algorithm()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	//2^64-1
+	r.integrity_payload = 18446744073709551615LU;
+	// does nothing
+	rmcp_session_set_integrity_payload_algorithm(&r, 8);
+
+	// (2^64-1)-(2^32-1)+(2^27)+(2^24-1)
+	printu(LOG_DEBUG, "\t\tassert(%lu == %lu)", r.integrity_payload, 18446744069565579263LU);
+	assert(r.integrity_payload == 18446744069565579263LU);
+}
+void t_rmcp_session_set_integrity_payload_reserved_678()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	//2^64-1
+	r.integrity_payload = 18446744073709551615LU;
+	// does nothing
+	rmcp_session_set_integrity_payload_reserved_678(&r, 8);
+	printu(LOG_DEBUG, "\t\tassert(%lu == %lu)", r.integrity_payload, 18446744073692774400LU);
+	assert(r.integrity_payload == 18446744073692774400LU);
+}
+
+void t_rmcp_session_set_confidentiality_payload_type()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	//2^64-1
+	r.confidentiality_payload = 18446744073709551615LU;
+	rmcp_session_set_confidentiality_payload_type(&r, 8);
+	printu(LOG_DEBUG, "\t\tassert(%lu == %lu)", r.confidentiality_payload, 648518346341351423);
+	assert(r.confidentiality_payload == 648518346341351423);
+}
+
+void t_rmcp_session_set_confidentiality_payload_reserved_23()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	//2^64-1
+	r.confidentiality_payload = 18446744073709551615LU;
+	// always sets to 0
+	rmcp_session_set_confidentiality_payload_reserved_23(&r, 256);
+	printu(LOG_DEBUG, "\t\tassert(%lu == %lu)", r.confidentiality_payload, 18374687579183251455LU);
+	assert(r.confidentiality_payload == 18374687579183251455LU);
+}
+
+void t_rmcp_session_set_confidentiality_payload_length()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	//2^64-1
+	r.confidentiality_payload = 18446744073709551615LU;
+	// does nothing
+	rmcp_session_set_confidentiality_payload_length(&r, 8);
+	// (2^64-1)-(2^40-1)+(2^35)+(2^32-1)
+	printu(LOG_DEBUG, "\t\tassert(%lu == %lu)", r.confidentiality_payload, 18446743012852629503LU);
+	assert(r.confidentiality_payload == 18446743012852629503LU);
+}
+
+void t_rmcp_session_set_confidentiality_payload_algorithm()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	//2^64-1
+	r.confidentiality_payload = 18446744073709551615LU;
+	// does nothing
+	rmcp_session_set_confidentiality_payload_algorithm(&r, 8);
+
+	// (2^64-1)-(2^32-1)+(2^27)+(2^24-1)
+	printu(LOG_DEBUG, "\t\tassert(%lu == %lu)", r.confidentiality_payload, 18446744069565579263LU);
+	assert(r.confidentiality_payload == 18446744069565579263LU);
+}
+void t_rmcp_session_set_confidentiality_payload_reserved_678()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	//2^64-1
+	r.confidentiality_payload = 18446744073709551615LU;
+	// does nothing
+	rmcp_session_set_confidentiality_payload_reserved_678(&r, 8);
+	printu(LOG_DEBUG, "\t\tassert(%lu == %lu)", r.confidentiality_payload, 18446744073692774400LU);
+	assert(r.confidentiality_payload == 18446744073692774400LU);
 }
 
 void t_unpackl()
@@ -1074,6 +1275,29 @@ void test_set_functions()
 
 	t_rmcp_session_set_message_tag();
 	t_rmcp_session_set_privilege_level_reserved();
+	t_rmcp_session_set_privilege_level_request();
+	t_rmcp_session_set_reserved();
+	t_rmcp_session_set_session_id();
+	t_rmcp_session_set_authentication_payload_type();
+	t_rmcp_session_set_authentication_payload_reserved_23();
+	t_rmcp_session_set_authentication_payload_length();
+	t_rmcp_session_set_authentication_payload_algorithm();
+	t_rmcp_session_set_authentication_payload_reserved_678();
+	t_rmcp_session_set_authentication_payload_type();
+	t_rmcp_session_set_authentication_payload_reserved_23();
+	t_rmcp_session_set_authentication_payload_length();
+	t_rmcp_session_set_authentication_payload_algorithm();
+	t_rmcp_session_set_authentication_payload_reserved_678();
+	t_rmcp_session_set_integrity_payload_type();
+	t_rmcp_session_set_integrity_payload_reserved_23();
+	t_rmcp_session_set_integrity_payload_length();
+	t_rmcp_session_set_integrity_payload_algorithm();
+	t_rmcp_session_set_integrity_payload_reserved_678();
+	t_rmcp_session_set_confidentiality_payload_type();
+	t_rmcp_session_set_confidentiality_payload_reserved_23();
+	t_rmcp_session_set_confidentiality_payload_length();
+	t_rmcp_session_set_confidentiality_payload_algorithm();
+	t_rmcp_session_set_confidentiality_payload_reserved_678();
 }
 
 void test_get_functions()

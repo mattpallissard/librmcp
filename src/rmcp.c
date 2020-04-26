@@ -434,7 +434,7 @@ uint8_t rmcp_session_get_authentication_payload_type(struct rmcp_session *r)
 	return (r->authentication_payload & 18374686479671623680LU) >> 56;
 }
 
-uint16_t rmcp_session_get_authenticaion_payload_reserved23(struct rmcp_session *r)
+uint16_t rmcp_session_get_authenticaion_payload_reserved_23(struct rmcp_session *r)
 {
 	/*
 	* (2^56-1)-(2^40-1)
@@ -473,7 +473,7 @@ uint8_t rmcp_session_get_confidentiality_payload_type(struct rmcp_session *r)
 	return (r->confidentiality_payload & 18374686479671623680LU) >> 56;
 }
 
-uint16_t rmcp_session_get_confidentiality_payload_reserved23(struct rmcp_session *r)
+uint16_t rmcp_session_get_confidentiality_payload_reserved_23(struct rmcp_session *r)
 {
 	/*
 	* (2^56-1)-(2^40-1)
@@ -511,12 +511,22 @@ void rmcp_session_set_message_tag(struct rmcp_session *r, uint8_t i)
 
 void rmcp_session_set_privilege_level_reserved(struct rmcp_session *r)
 {
+	/*
+
+	high 4 bits
+
+	*/
 	r->max_privilege_level &= 15;
 }
 
 void rmcp_session_set_privilege_level_request(struct rmcp_session *r, uint8_t i)
 {
-	r->max_privilege_level |= i & 16;
+	/*
+
+	low 4 bits
+
+	*/
+	r->max_privilege_level |= i & 15;
 }
 
 void rmcp_session_set_reserved(struct rmcp_session *r, uint8_t i)
@@ -535,18 +545,18 @@ void rmcp_session_set_authentication_payload_type(struct rmcp_session *r, uint8_
 	* authentication algorithm = 00h
 	*/
 
-	// 2^64-1
-	r->authentication_payload &= 9223372036854775807;
+	// (2^56-1)
+	r->authentication_payload &= 72057594037927935;
 	r->authentication_payload |= (uint64_t)i << 56;
 }
 
-void rmcp_session_set_authentication_payload_reserved23(struct rmcp_session *r, uint16_t i)
+void rmcp_session_set_authentication_payload_reserved_23(struct rmcp_session *r, uint16_t i)
 {
 	/*
 	*  reserved = 00h
 	*/
 	// (2^64-1)-(2^56-1)+(2^40-1)
-	r->authentication_payload &= 9187343789591625727;
+	r->authentication_payload &= 18374687579183251455LU;
 	// r->authentication_payload |= (uint64_t)i << 48;
 }
 
@@ -557,18 +567,18 @@ void rmcp_session_set_authentication_payload_length(struct rmcp_session *r, uint
 	* 08h for this spec
 	*/
 	// (2^64-1)-(2^40-1)+(2^32-1)
-	r->authentication_payload &= 9223371489246445567;
-	r->authentication_payload |= (uint64_t)i << 40;
+	r->authentication_payload &= 18446742978492891135LU;
+	r->authentication_payload |= (uint64_t)i << 32;
 }
 
 void rmcp_session_set_authentication_payload_algorithm(struct rmcp_session *r, uint8_t i)
 {
 	// (2^64-1)-(2^32-1)+(2^24-1)
-	r->authentication_payload &= 9223372034715680767;
-	r->authentication_payload |= (uint64_t)i << 32;
+	r->authentication_payload &= 18446744069431361535LU;
+	r->authentication_payload |= (uint64_t)i << 24;
 }
 
-void rmcp_session_set_authenticaiton_payload_reserved_678(struct rmcp_session *r, uint32_t i)
+void rmcp_session_set_authentication_payload_reserved_678(struct rmcp_session *r, uint32_t i)
 {
 	/*
 	* reserved bytes 6-8
