@@ -23,6 +23,15 @@ building
   ctest
 
 
+development
+===========
+
+
+There is a `clang-tidy` file as well as a symlink to `build/compile_commands.json` for use with editors/lsp/clangd.
+
+There is also a `clang-format`
+
+
 todo
 ====
 
