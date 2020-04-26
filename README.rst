@@ -8,6 +8,8 @@ librmcp
 .. image:: https://codecov.io/gh/mattpallissard/librmcp/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/mattpallissard/librmcp
 
+.. image:: https://img.shields.io/lgtm/alerts/g/mattpallissard/librmcp.svg?logo=lgtm&logoWidth=18
+    : target: https://lgtm.com/projects/g/mattpallissard/librmcp/alerts/
 
 
 an rmpc library based on the IPMI 2.0 spec.
@@ -16,11 +18,6 @@ questions, comments, and PR's can be emailed to rmcp a_t pallissard D0T net
 
 status
 ======
-
-
-build stuff
-
-
 
 
 Right now all that's working is enough basic functionality to run a `ping`.  see `print_ping.c`
