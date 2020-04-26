@@ -1,0 +1,9 @@
+---
+language: c
+sudo: false
+script:
+  - mkdir build
+  - pushd build
+  - cmake ..
+  - cmake --build .
+  - ctest
