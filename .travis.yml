@@ -1,11 +1,12 @@
 ---
 language: c
 sudo: false
+compiler:
+  - gcc
+  - clang
 script:
   - mkdir build
   - pushd build
   - cmake ..
   - cmake --build .
   - ctest
-
-
