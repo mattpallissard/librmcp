@@ -15,4 +15,7 @@ env:
 
 after_success:
   - pushd build
-  - bash <(curl -s https://codecov.io/bash)
+  - curl -s https://codecov.io/bash > codecov.sh
+  - chmod +x codecov.sh
+  - '[[ $toolchain == *"clang"* ]] && ./codecov.sh -x "llvm-cov gcov"'
+  - '[[ $toolchain != *"clang"* ]] && ./codecov.sh -x "gcov"'
