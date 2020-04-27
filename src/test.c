@@ -949,7 +949,6 @@ void t_rmcp_session_get_message_tag()
 	i = rmcp_session_get_message_tag(&r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 255);
 	assert(i == 255);
-
 }
 
 void t_rmcp_session_get_privilege_level_reserved()
@@ -963,7 +962,6 @@ void t_rmcp_session_get_privilege_level_reserved()
 	i = rmcp_session_get_privilege_level_reserved(&r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 0);
 	assert(i == 0);
-
 }
 
 void t_rmcp_session_get_privilege_level_request()
@@ -977,7 +975,6 @@ void t_rmcp_session_get_privilege_level_request()
 	i = rmcp_session_get_privilege_level_request(&r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 0);
 	assert(i == 0);
-
 }
 
 void t_rmcp_session_get_session_id()
@@ -991,9 +988,7 @@ void t_rmcp_session_get_session_id()
 	i = rmcp_session_get_session_id(&r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 255);
 	assert(i == 255);
-
 }
-
 
 void t_rmcp_session_get_authentication_payload_type()
 {
@@ -1006,9 +1001,7 @@ void t_rmcp_session_get_authentication_payload_type()
 	i = rmcp_session_get_authentication_payload_type(&r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 63);
 	assert(i == 63);
-
 }
-
 
 void t_rmcp_session_get_authentication_payload_reserved_23()
 {
@@ -1022,7 +1015,6 @@ void t_rmcp_session_get_authentication_payload_reserved_23()
 	// should always set zero
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 0);
 	assert(i == 0);
-
 }
 
 void t_rmcp_session_get_authentication_payload_length()
@@ -1036,7 +1028,6 @@ void t_rmcp_session_get_authentication_payload_length()
 	i = rmcp_session_get_authentication_payload_length(&r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 63);
 	assert(i == 63);
-
 }
 
 void t_rmcp_session_get_authentication_payload_algorithm()
@@ -1050,7 +1041,6 @@ void t_rmcp_session_get_authentication_payload_algorithm()
 	i = rmcp_session_get_authentication_payload_algorithm(&r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 12);
 	assert(i == 12);
-
 }
 
 void t_rmcp_session_get_authentication_payload_reserved_678()
@@ -1065,7 +1055,6 @@ void t_rmcp_session_get_authentication_payload_reserved_678()
 	// should always set zero
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 0);
 	assert(i == 0);
-
 }
 
 void t_rmcp_session_get_integrity_payload_type()
@@ -1079,9 +1068,7 @@ void t_rmcp_session_get_integrity_payload_type()
 	i = rmcp_session_get_integrity_payload_type(&r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 63);
 	assert(i == 63);
-
 }
-
 
 void t_rmcp_session_get_integrity_payload_reserved_23()
 {
@@ -1095,7 +1082,6 @@ void t_rmcp_session_get_integrity_payload_reserved_23()
 	// should always set zero
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 0);
 	assert(i == 0);
-
 }
 
 void t_rmcp_session_get_integrity_payload_length()
@@ -1109,7 +1095,6 @@ void t_rmcp_session_get_integrity_payload_length()
 	i = rmcp_session_get_integrity_payload_length(&r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 63);
 	assert(i == 63);
-
 }
 
 void t_rmcp_session_get_integrity_payload_algorithm()
@@ -1123,7 +1108,6 @@ void t_rmcp_session_get_integrity_payload_algorithm()
 	i = rmcp_session_get_integrity_payload_algorithm(&r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 12);
 	assert(i == 12);
-
 }
 
 void t_rmcp_session_get_integrity_payload_reserved_678()
@@ -1138,7 +1122,6 @@ void t_rmcp_session_get_integrity_payload_reserved_678()
 	// should always set zero
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 0);
 	assert(i == 0);
-
 }
 
 void t_rmcp_session_get_confidentiality_payload_type()
@@ -1152,9 +1135,7 @@ void t_rmcp_session_get_confidentiality_payload_type()
 	i = rmcp_session_get_confidentiality_payload_type(&r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 63);
 	assert(i == 63);
-
 }
-
 
 void t_rmcp_session_get_confidentiality_payload_reserved_23()
 {
@@ -1168,7 +1149,6 @@ void t_rmcp_session_get_confidentiality_payload_reserved_23()
 	// should always set zero
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 0);
 	assert(i == 0);
-
 }
 
 void t_rmcp_session_get_confidentiality_payload_length()
@@ -1182,7 +1162,6 @@ void t_rmcp_session_get_confidentiality_payload_length()
 	i = rmcp_session_get_confidentiality_payload_length(&r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 63);
 	assert(i == 63);
-
 }
 
 void t_rmcp_session_get_confidentiality_payload_algorithm()
@@ -1196,7 +1175,6 @@ void t_rmcp_session_get_confidentiality_payload_algorithm()
 	i = rmcp_session_get_confidentiality_payload_algorithm(&r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 12);
 	assert(i == 12);
-
 }
 
 void t_rmcp_session_get_confidentiality_payload_reserved_678()
@@ -1211,7 +1189,6 @@ void t_rmcp_session_get_confidentiality_payload_reserved_678()
 	// should always set zero
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 0);
 	assert(i == 0);
-
 }
 
 void t_rmcp_session_set_message_tag()
