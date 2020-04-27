@@ -8,16 +8,13 @@ librmcp
 .. image:: https://codecov.io/gh/mattpallissard/librmcp/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/mattpallissard/librmcp
 
-.. image:: https://img.shields.io/lgtm/alerts/g/mattpallissard/librmcp.svg?logo=lgtm&logoWidth=18
-    :target: https://lgtm.com/projects/g/mattpallissard/librmcp/alerts/
-
 .. image:: https://img.shields.io/lgtm/grade/cpp/g/mattpallissard/librmcp.svg?logo=lgtm&logoWidth=18
     :target: https://lgtm.com/projects/g/mattpallissard/librmcp/context:cpp
 
 
-an rmpc library based on the IPMI 2.0 spec.
+A RMPC library based on the IPMI 2.0 spec.
 
-questions, comments, and PR's can be emailed to rmcp a_t pallissard D0T net
+Questions, comments,  concerns can be emailed to rmcp at pallissard dot net.
 
 status
 ======
@@ -37,17 +34,21 @@ building
   ctest
 
 
-development
-===========
 
-
-There is a `clang-tidy` file as well as a symlink to `build/compile_commands.json` for use with editors/lsp/clangd.
-
-There is also a `clang-format`
-
-
-todo
+work
 ====
 
-1. docment what's here
-2. finish this todo...
+
++---------------+-------------+-----------------------------------------------------+
+| item          | status      | notes                                               |
++---------------+-------------+-----------------------------------------------------+
+| authentiction | in progress | get/set complete work, serialization needs doing    |
++---------------+-------------+-----------------------------------------------------+
+| logging       | to do       | put some polish on the (internal only) debug loggin |
++---------------+-------------+-----------------------------------------------------+
+| protocl       | toto        | maintain state, etc                                 |
++---------------+-------------+-----------------------------------------------------+
+| api           | to do       | standardize on public /private api                  |
++---------------+-------------+-----------------------------------------------------+
+| issue tracker | to do       | probably just use github                            |
++---------------+-------------+-----------------------------------------------------+
