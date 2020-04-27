@@ -434,7 +434,7 @@ uint8_t rmcp_session_get_authentication_payload_type(struct rmcp_session *r)
 	return (r->authentication_payload & 18374686479671623680LU) >> 56;
 }
 
-uint16_t rmcp_session_get_authenticaion_payload_reserved_23(struct rmcp_session *r)
+uint16_t rmcp_session_get_authentication_payload_reserved_23(struct rmcp_session *r)
 {
 	/*
 	* (2^56-1)-(2^40-1)
@@ -449,7 +449,7 @@ uint8_t rmcp_session_get_authentication_payload_length(struct rmcp_session *r)
 	return (r->authentication_payload & 1095216660480) >> 32;
 }
 
-uint8_t rmcp_session_get_authenticaiton_payload_algorithm(struct rmcp_session *r)
+uint8_t rmcp_session_get_authentication_payload_algorithm(struct rmcp_session *r)
 {
 	/*
 	* (2^32-1)-(2^24-1)
@@ -463,6 +463,45 @@ uint32_t rmcp_session_get_authentication_payload_reserved_678(struct rmcp_sessio
 	* 2^24-1
 	*/
 	return r->authentication_payload & 16777215;
+}
+
+uint8_t rmcp_session_get_integrity_payload_type(struct rmcp_session *r)
+{
+	/*
+	* (2^64-1)-(2^56-1)
+	*/
+	return (r->integrity_payload & 18374686479671623680LU) >> 56;
+}
+
+uint16_t rmcp_session_get_integrity_payload_reserved_23(struct rmcp_session *r)
+{
+	/*
+	* (2^56-1)-(2^40-1)
+	*/
+	return (r->integrity_payload & 72056494526300160LU >> 40);
+}
+uint8_t rmcp_session_get_integrity_payload_length(struct rmcp_session *r)
+{
+	/*
+	* (2^40-1)-(2^32-1)
+	*/
+	return (r->integrity_payload & 1095216660480) >> 32;
+}
+
+uint8_t rmcp_session_get_integrity_payload_algorithm(struct rmcp_session *r)
+{
+	/*
+	* (2^32-1)-(2^24-1)
+	*/
+	return (r->integrity_payload & 4278190080) >> 24;
+}
+
+uint32_t rmcp_session_get_integrity_payload_reserved_678(struct rmcp_session *r)
+{
+	/*
+	* 2^24-1
+	*/
+	return r->integrity_payload & 16777215;
 }
 
 uint8_t rmcp_session_get_confidentiality_payload_type(struct rmcp_session *r)
@@ -575,7 +614,7 @@ void rmcp_session_set_authentication_payload_algorithm(struct rmcp_session *r, u
 {
 	// (2^64-1)-(2^32-1)+(2^24-1)
 	r->authentication_payload &= 18446744069431361535LU;
-	r->authentication_payload |= (uint64_t)i << 24;
+	r->authentication_payload |= (uint64_t)(i & 31) << 24;
 }
 
 void rmcp_session_set_authentication_payload_reserved_678(struct rmcp_session *r, uint32_t i)

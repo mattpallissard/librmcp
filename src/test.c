@@ -938,6 +938,282 @@ void t_rmcp_msg_header_set_class_type()
 	assert(r.message_class == 64);
 }
 
+void t_rmcp_session_get_message_tag()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t i;
+	r.message_tag = 0;
+
+	rmcp_session_set_message_tag(&r, 255);
+	i = rmcp_session_get_message_tag(&r);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 255);
+	assert(i == 255);
+
+}
+
+void t_rmcp_session_get_privilege_level_reserved()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t i;
+	r.max_privilege_level = 0;
+
+	rmcp_session_set_privilege_level_reserved(&r);
+	i = rmcp_session_get_privilege_level_reserved(&r);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 0);
+	assert(i == 0);
+
+}
+
+void t_rmcp_session_get_privilege_level_request()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t i;
+	r.max_privilege_level = 0;
+
+	rmcp_session_set_privilege_level_request(&r, 63);
+	i = rmcp_session_get_privilege_level_request(&r);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 0);
+	assert(i == 0);
+
+}
+
+void t_rmcp_session_get_session_id()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t i;
+	r.session_id = 0;
+
+	rmcp_session_set_session_id(&r, 255);
+	i = rmcp_session_get_session_id(&r);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 255);
+	assert(i == 255);
+
+}
+
+
+void t_rmcp_session_get_authentication_payload_type()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t i;
+	r.authentication_payload = 0;
+
+	rmcp_session_set_authentication_payload_type(&r, 63);
+	i = rmcp_session_get_authentication_payload_type(&r);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 63);
+	assert(i == 63);
+
+}
+
+
+void t_rmcp_session_get_authentication_payload_reserved_23()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t i;
+	r.authentication_payload = 0;
+
+	rmcp_session_set_authentication_payload_reserved_23(&r, 63);
+	i = rmcp_session_get_authentication_payload_reserved_23(&r);
+	// should always set zero
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 0);
+	assert(i == 0);
+
+}
+
+void t_rmcp_session_get_authentication_payload_length()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t i;
+	r.authentication_payload = 0;
+
+	rmcp_session_set_authentication_payload_length(&r, 63);
+	i = rmcp_session_get_authentication_payload_length(&r);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 63);
+	assert(i == 63);
+
+}
+
+void t_rmcp_session_get_authentication_payload_algorithm()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t i;
+	r.authentication_payload = 0;
+
+	rmcp_session_set_authentication_payload_algorithm(&r, 12);
+	i = rmcp_session_get_authentication_payload_algorithm(&r);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 12);
+	assert(i == 12);
+
+}
+
+void t_rmcp_session_get_authentication_payload_reserved_678()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t i;
+	r.authentication_payload = 0;
+
+	rmcp_session_set_authentication_payload_reserved_678(&r, 63);
+	i = rmcp_session_get_authentication_payload_reserved_678(&r);
+	// should always set zero
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 0);
+	assert(i == 0);
+
+}
+
+void t_rmcp_session_get_integrity_payload_type()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t i;
+	r.integrity_payload = 0;
+
+	rmcp_session_set_integrity_payload_type(&r, 63);
+	i = rmcp_session_get_integrity_payload_type(&r);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 63);
+	assert(i == 63);
+
+}
+
+
+void t_rmcp_session_get_integrity_payload_reserved_23()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t i;
+	r.integrity_payload = 0;
+
+	rmcp_session_set_integrity_payload_reserved_23(&r, 63);
+	i = rmcp_session_get_integrity_payload_reserved_23(&r);
+	// should always set zero
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 0);
+	assert(i == 0);
+
+}
+
+void t_rmcp_session_get_integrity_payload_length()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t i;
+	r.integrity_payload = 0;
+
+	rmcp_session_set_integrity_payload_length(&r, 63);
+	i = rmcp_session_get_integrity_payload_length(&r);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 63);
+	assert(i == 63);
+
+}
+
+void t_rmcp_session_get_integrity_payload_algorithm()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t i;
+	r.integrity_payload = 0;
+
+	rmcp_session_set_integrity_payload_algorithm(&r, 12);
+	i = rmcp_session_get_integrity_payload_algorithm(&r);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 12);
+	assert(i == 12);
+
+}
+
+void t_rmcp_session_get_integrity_payload_reserved_678()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t i;
+	r.integrity_payload = 0;
+
+	rmcp_session_set_integrity_payload_reserved_678(&r, 63);
+	i = rmcp_session_get_integrity_payload_reserved_678(&r);
+	// should always set zero
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 0);
+	assert(i == 0);
+
+}
+
+void t_rmcp_session_get_confidentiality_payload_type()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t i;
+	r.confidentiality_payload = 0;
+
+	rmcp_session_set_confidentiality_payload_type(&r, 63);
+	i = rmcp_session_get_confidentiality_payload_type(&r);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 63);
+	assert(i == 63);
+
+}
+
+
+void t_rmcp_session_get_confidentiality_payload_reserved_23()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t i;
+	r.confidentiality_payload = 0;
+
+	rmcp_session_set_confidentiality_payload_reserved_23(&r, 63);
+	i = rmcp_session_get_confidentiality_payload_reserved_23(&r);
+	// should always set zero
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 0);
+	assert(i == 0);
+
+}
+
+void t_rmcp_session_get_confidentiality_payload_length()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t i;
+	r.confidentiality_payload = 0;
+
+	rmcp_session_set_confidentiality_payload_length(&r, 63);
+	i = rmcp_session_get_confidentiality_payload_length(&r);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 63);
+	assert(i == 63);
+
+}
+
+void t_rmcp_session_get_confidentiality_payload_algorithm()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t i;
+	r.confidentiality_payload = 0;
+
+	rmcp_session_set_confidentiality_payload_algorithm(&r, 12);
+	i = rmcp_session_get_confidentiality_payload_algorithm(&r);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 12);
+	assert(i == 12);
+
+}
+
+void t_rmcp_session_get_confidentiality_payload_reserved_678()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t i;
+	r.confidentiality_payload = 0;
+
+	rmcp_session_set_confidentiality_payload_reserved_678(&r, 63);
+	i = rmcp_session_get_confidentiality_payload_reserved_678(&r);
+	// should always set zero
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", i, 0);
+	assert(i == 0);
+
+}
+
 void t_rmcp_session_set_message_tag()
 {
 	struct rmcp_session r;
@@ -1321,14 +1597,37 @@ void test_get_functions()
 	t_asf_msg_header_get_length();
 	t_asf_msg_header_get_reserved();
 	t_asf_msg_header_get_tag();
+
+	t_rmcp_session_get_message_tag();
+	t_rmcp_session_get_privilege_level_reserved();
+	t_rmcp_session_get_privilege_level_request();
+	t_rmcp_session_get_session_id();
+
+	t_rmcp_session_get_authentication_payload_type();
+	t_rmcp_session_get_authentication_payload_reserved_23();
+	t_rmcp_session_get_authentication_payload_length();
+	t_rmcp_session_get_authentication_payload_algorithm();
+	t_rmcp_session_get_authentication_payload_reserved_678();
+
+	t_rmcp_session_get_integrity_payload_type();
+	t_rmcp_session_get_integrity_payload_reserved_23();
+	t_rmcp_session_get_integrity_payload_length();
+	t_rmcp_session_get_integrity_payload_algorithm();
+	t_rmcp_session_get_integrity_payload_reserved_678();
+
+	t_rmcp_session_get_confidentiality_payload_type();
+	t_rmcp_session_get_confidentiality_payload_reserved_23();
+	t_rmcp_session_get_confidentiality_payload_length();
+	t_rmcp_session_get_confidentiality_payload_algorithm();
+	t_rmcp_session_get_confidentiality_payload_reserved_678();
 }
 
 int main(void)
 {
 	setprintmask(LOG_DEBUG);
 	test_unpack_functions();
-	test_get_functions();
 	test_pack_functions();
 	test_set_functions();
+	test_get_functions();
 	return 0;
 }
