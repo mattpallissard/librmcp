@@ -1,3 +1,4 @@
+#include "rmcp.h"
 /*
 Copyright (c) 2020 matt pallissard
 
@@ -745,6 +746,78 @@ void rmcp_session_set_confidentiality_payload_reserved_678(struct rmcp_session *
 	// 2^24-1
 	// r->confidentiality_payload |= (i & 16777215);
 };
+
+void rmcp_session_header_pack_message_tag(uint8_t *d, struct rmcp_session *r)
+{
+	packl(&(d)[RMCP_SESSION_MESSAGE_TAG_OFFSET], r->message_tag, RMCP_SESSION_MESSAGE_TAG_SIZE);
+}
+
+void rmcp_session_header_pack_privilege_level(uint8_t *d, struct rmcp_session *r)
+{
+	packl(&(d)[RMCP_SESSION_MAX_PRIV_LEVEL_OFFSET], r->max_privilege_level, RMCP_SESSION_MAX_PRIV_LEVEL_SIZE);
+}
+
+
+void rmcp_session_header_pack_reserved(uint8_t *d, struct rmcp_session *r)
+{
+	packl(&(d)[RMCP_SESSION_RESERVED_OFFSET], r->reserved, RMCP_SESSION_RESERVED_SIZE);
+}
+
+void rmcp_session_header_pack_session_id(uint8_t *d, struct rmcp_session *r)
+{
+	packl(&(d)[RMCP_SESSION_SESSION_ID_OFFSET], r->session_id, RMCP_SESSION_SESSION_ID_SIZE);
+}
+
+void rmcp_session_header_pack_authentication_payload(uint8_t *d, struct rmcp_session *r)
+{
+	packl(&(d)[RMCP_SESSION_AUTHENTICATION_PAYLOAD_OFFSET], r->authentication_payload, RMCP_SESSION_AUTHENTICATION_PAYLOAD_OFFSET);
+}
+
+void rmcp_session_header_pack_integrity_payload(uint8_t *d, struct rmcp_session *r)
+{
+	packl(&(d)[RMCP_SESSION_INTEGRITY_PAYLOAD_OFFSET], r->integrity_payload, RMCP_SESSION_INTEGRITY_PAYLOAD_OFFSET);
+}
+
+void rmcp_session_header_pack_confidentiality_payload(uint8_t *d, struct rmcp_session *r)
+{
+	packl(&(d)[RMCP_SESSION_INTEGRITY_PAYLOAD_OFFSET], r->confidentiality_payload, RMCP_SESSION_INTEGRITY_PAYLOAD_OFFSET);
+}
+
+void rmcp_session_header_unpack_message_tag(uint8_t *d, struct rmcp_session *r)
+{
+	r->message_tag = unpackl(&(d)[RMCP_SESSION_MESSAGE_TAG_OFFSET], RMCP_SESSION_MESSAGE_TAG_SIZE);
+}
+
+void rmcp_session_header_unpack_privilege_level(uint8_t *d, struct rmcp_session *r)
+{
+	r->max_privilege_level = unpackl(&(d)[RMCP_SESSION_MAX_PRIV_LEVEL_OFFSET], RMCP_SESSION_MAX_PRIV_LEVEL_SIZE);
+}
+
+
+void rmcp_session_header_unpack_reserved(uint8_t *d, struct rmcp_session *r)
+{
+	r->reserved = unpackl(&(d)[RMCP_SESSION_RESERVED_OFFSET], RMCP_SESSION_RESERVED_SIZE);
+}
+
+void rmcp_session_header_unpack_session_id(uint8_t *d, struct rmcp_session *r)
+{
+	r->session_id = unpackl(&(d)[RMCP_SESSION_SESSION_ID_OFFSET], RMCP_SESSION_SESSION_ID_SIZE);
+}
+
+void rmcp_session_header_unpack_authentication_payload(uint8_t *d, struct rmcp_session *r)
+{
+	r->authentication_payload = unpackl(&(d)[RMCP_SESSION_AUTHENTICATION_PAYLOAD_OFFSET], RMCP_SESSION_AUTHENTICATION_PAYLOAD_OFFSET);
+}
+
+void rmcp_session_header_unpack_integrity_payload(uint8_t *d, struct rmcp_session *r)
+{
+	r->integrity_payload = unpackl(&(d)[RMCP_SESSION_INTEGRITY_PAYLOAD_OFFSET], RMCP_SESSION_INTEGRITY_PAYLOAD_OFFSET);
+}
+
+void rmcp_session_header_unpack_confidentiality_payload(uint8_t *d, struct rmcp_session *r)
+{
+	r->integrity_payload = unpackl(&(d)[RMCP_SESSION_INTEGRITY_PAYLOAD_OFFSET], RMCP_SESSION_INTEGRITY_PAYLOAD_OFFSET);
+}
 
 void rmcp_ping_set()
 {
