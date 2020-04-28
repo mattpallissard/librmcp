@@ -25,7 +25,9 @@ SOFTWARE.
 #include <stdlib.h>
 enum {
 	/*
-	*  network and session stuff
+
+	network and session stuff
+
 	*/
 	RMCP_PORT_SECURE = 664,
 	RMCP_PORT_CLEAR = 623,
@@ -33,7 +35,9 @@ enum {
 };
 enum {
 	/*
-	*  rmcp header
+
+	rmcp header
+
 	*/
 	RMCP_MSG_HEADER_CLASS_ASF = 6,
 	RMCP_MSG_HEADER_CLASS_IPMI = 7,
@@ -49,9 +53,11 @@ enum {
 };
 enum {
 	/*
-	* asf header
-	* there isn't an asf header defined in the spec. we've just separated
-	* the data from the rest of the message.
+
+	asf header
+	there isn't an asf header defined in the spec. we've just separated
+	the data from the rest of the message.
+
 	*/
 	ASF_MSG_HEADER_IANA_OFFSET = RMCP_MSG_HEADER_CLASS_OFFSET + RMCP_MSG_HEADER_CLASS_SIZE,
 	ASF_MSG_HEADER_IANA_SIZE = sizeof(uint32_t),
@@ -67,9 +73,11 @@ enum {
 };
 enum {
 	/*
-	* asf data
-	* as stated above, there isn't an asf data defined in the spec.  We just use
-	* this for the payload.
+
+	asf data
+	as stated above, there isn't an asf data defined in the spec.  We just use
+	this for the payload.
+
 	*/
 	ASF_MSG_DATA_IANA_OFFSET = ASF_MSG_HEADER_DATA_LEN_OFFSET + ASF_MSG_HEADER_DATA_LEN_SIZE,
 	ASF_MSG_DATA_IANA_SIZE = sizeof(uint32_t),
@@ -85,7 +93,9 @@ enum {
 };
 enum {
 	/*
-	* rcmp open session request data
+
+	rcmp open session request data
+
 	*/
 	RMCP_SESSION_MESSAGE_TAG_OFFSET = 0,
 	RMCP_SESSION_MESSAGE_TAG_SIZE = sizeof(uint8_t),
@@ -103,12 +113,83 @@ enum {
 };
 
 enum {
-	RMCP_SESSION_PRIVILEGE_UNDEFINED = 0,
-	RMCP_SESSION_PRIVILEGE_CALLBACK = 1,
-	RMCP_SESSION_PRIVILEGE_USER = 2,
-	RMCP_SESSION_PRIVILEGE_OPERATOR = 3,
-	RMCP_SESSION_PRIVILEGE_ADMINISTRATOR = 4,
-	RMCP_SESSION_PRIVILEGE_OEM = 5,
+	/*
+
+	rmcp session privilege levels
+
+	*/
+	RMCP_SESSION_PRIVILEGE_UNDEFINED,
+	RMCP_SESSION_PRIVILEGE_CALLBACK,
+	RMCP_SESSION_PRIVILEGE_USER,
+	RMCP_SESSION_PRIVILEGE_OPERATOR,
+	RMCP_SESSION_PRIVILEGE_ADMINISTRATOR,
+	RMCP_SESSION_PRIVILEGE_OEM,
+};
+
+enum {
+	/*
+
+	rmcp and rakp message status codes
+
+	*/
+	RMCP_STATUS_NO_ERROR,
+	RMCP_STATUS_INSUFFICIENT_RESOURCE,
+	RMCP_STATUS_INVALID_SESSION_ID,
+	RMCP_STATUS_INVALID_PAYLOAD_TYPE,
+	RMCP_STATUS_INVALID_AUTHENTICATION_ALGORITHM,
+	RMCP_STATUS_INVALID_INTEGRITY_ALGORITHM,
+	RMCP_STATUS_NO_MATCHING_AUTHENTICATION_PAYLOAD,
+	RMCP_STATUS_NO_MATCHING_INTEGRITY_PAYLOAD,
+	RMCP_STATUS_INACTIVE_SESSION_ID,
+	RMCP_STATUS_INVALID_ROLE,
+	RMCP_STATUS_UNAUTHORIZED_PRIVILEGE_LEVEL,
+	RMCP_STATUS_INSUFFICIENT_RESOURCES,
+	RMCP_STATUS_INVALID_NAME_LENGTH,
+	RMCP_STATUS_UNAUTHORIZED_NAME,
+	RMCP_STATUS_UNAUTHORIZED_GUID,
+	RMCP_STATUS_INVALID_INTEGRITY_CHECK,
+	RMCP_STATUS_INVALID_CONFIDENTIALITY_CHECK,
+	RMCP_STATUS_NO_CIPHER_SUITE,
+	RMCP_STATUS_ILLEGAL_PARAMETER,
+};
+
+enum {
+	/*
+
+	authentication algorithms
+
+	*/
+	RMCP_AUTHENTICATION_ALGORITHM_RAKP_NONE,
+	RMCP_AUTHENTICATION_ALGORITHM_RAKP_HMAC_SHA1,
+	RMCP_AUTHENTICATION_ALGORITHM_RAKP_HMAC_MD5,
+	RMCP_AUTHENTICATION_ALGORITHM_RAKP_HMAK_SHA256,
+};
+
+enum {
+	/*
+
+	integrity algorithms
+
+	*/
+
+	RMCP_INTEGRITY_ALGORITHM_NONE,
+	RMCP_INTEGRITY_ALGORITHM_HMAC_SHA1_96,
+	RMCP_INTEGRITY_ALGORITHM_HMAC_MD5_128,
+	RMCP_INTEGRITY_ALGORITHM_MD5_128,
+	RMCP_INTEGRITY_ALGORITHM_HMAC_SHA256_128,
+
+};
+
+enum {
+	/*
+
+	confidentiality algorithms
+
+	*/
+	RMCP_CONFIDENTIALITY_ALGORITHM_NONE,
+	RMCP_CONFIDENTIALITY_ALGORITHM_AES_CBC_128,
+	RMCP_CONFIDENTIALITY_ALGORITHM_XRC4_128,
+	RMCP_CONFIDENTIALITY_ALGORITHM_XRC4_40,
 };
 
 struct rmcp_header {
