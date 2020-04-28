@@ -1431,7 +1431,7 @@ void t_rmcp_session_pack_message_tag()
 {
 	printu(LOG_DEBUG, __func__);
 	struct rmcp_session r;
-	uint8_t d[32*8];
+	uint8_t d[32 * 8];
 	uint8_t i;
 
 	r.message_tag = 64;
@@ -1447,7 +1447,7 @@ void t_rmcp_session_pack_privilege_level()
 {
 	printu(LOG_DEBUG, __func__);
 	struct rmcp_session r;
-	uint8_t d[32*8];
+	uint8_t d[32 * 8];
 
 	r.max_privilege_level = 64;
 	rmcp_session_header_pack_privilege_level(d, &r);
@@ -1460,12 +1460,12 @@ void t_rmcp_session_pack_reserved()
 {
 	printu(LOG_DEBUG, __func__);
 	struct rmcp_session r;
-	uint8_t d[32*8];
+	uint8_t d[32 * 8];
 
 	r.reserved = 65535;
 	rmcp_session_header_pack_reserved(d, &r);
 	r.reserved = 0;
-	rmcp_session_header_unpack_reserved(d , &r);
+	rmcp_session_header_unpack_reserved(d, &r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.reserved, 65535);
 	assert(r.reserved == 65535);
 }
@@ -1473,7 +1473,7 @@ void t_rmcp_session_pack_session_id()
 {
 	printu(LOG_DEBUG, __func__);
 	struct rmcp_session r;
-	uint8_t d[32*8];
+	uint8_t d[32 * 8];
 
 	r.session_id = 4294967295;
 	rmcp_session_header_pack_session_id(d, &r);
@@ -1487,7 +1487,7 @@ void t_rmcp_session_unpack_message_tag()
 {
 	printu(LOG_DEBUG, __func__);
 	struct rmcp_session r;
-	uint8_t d[32*8];
+	uint8_t d[32 * 8];
 	uint8_t i;
 
 	r.message_tag = 64;
@@ -1503,7 +1503,7 @@ void t_rmcp_session_unpack_privilege_level()
 {
 	printu(LOG_DEBUG, __func__);
 	struct rmcp_session r;
-	uint8_t d[32*8];
+	uint8_t d[32 * 8];
 
 	r.max_privilege_level = 64;
 	rmcp_session_header_pack_privilege_level(d, &r);
@@ -1516,12 +1516,12 @@ void t_rmcp_session_unpack_reserved()
 {
 	printu(LOG_DEBUG, __func__);
 	struct rmcp_session r;
-	uint8_t d[32*8];
+	uint8_t d[32 * 8];
 
 	r.reserved = 65535;
 	rmcp_session_header_pack_reserved(d, &r);
 	r.reserved = 0;
-	rmcp_session_header_unpack_reserved(d , &r);
+	rmcp_session_header_unpack_reserved(d, &r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.reserved, 65535);
 	assert(r.reserved == 65535);
 }
@@ -1529,7 +1529,7 @@ void t_rmcp_session_unpack_session_id()
 {
 	printu(LOG_DEBUG, __func__);
 	struct rmcp_session r;
-	uint8_t d[32*8];
+	uint8_t d[32 * 8];
 
 	r.session_id = 4294967295;
 	rmcp_session_header_pack_session_id(d, &r);
