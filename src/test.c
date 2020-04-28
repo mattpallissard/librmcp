@@ -1427,6 +1427,118 @@ void t_rmcp_session_set_confidentiality_payload_reserved_678()
 	assert(r.confidentiality_payload == 18446744073692774400LU);
 }
 
+void t_rmcp_session_pack_message_tag()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t d[32*8];
+	uint8_t i;
+
+	r.message_tag = 64;
+	rmcp_session_header_pack_message_tag(d, &r);
+	r.message_tag = 0;
+	rmcp_session_header_unpack_message_tag(d, &r);
+
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.message_tag, 64);
+	assert(r.message_tag == 64);
+}
+
+void t_rmcp_session_pack_privilege_level()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t d[32*8];
+
+	r.max_privilege_level = 64;
+	rmcp_session_header_pack_privilege_level(d, &r);
+	r.max_privilege_level = 0;
+	rmcp_session_header_unpack_privilege_level(d, &r);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.max_privilege_level, 64);
+	assert(r.max_privilege_level == 64);
+}
+void t_rmcp_session_pack_reserved()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t d[32*8];
+
+	r.reserved = 65535;
+	rmcp_session_header_pack_reserved(d, &r);
+	r.reserved = 0;
+	rmcp_session_header_unpack_reserved(d , &r);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.reserved, 65535);
+	assert(r.reserved == 65535);
+}
+void t_rmcp_session_pack_session_id()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t d[32*8];
+
+	r.session_id = 4294967295;
+	rmcp_session_header_pack_session_id(d, &r);
+	r.session_id = 0;
+	rmcp_session_header_unpack_session_id(d, &r);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.session_id, 4294967295);
+	assert(r.session_id == 4294967295);
+}
+
+void t_rmcp_session_unpack_message_tag()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t d[32*8];
+	uint8_t i;
+
+	r.message_tag = 64;
+	rmcp_session_header_pack_message_tag(d, &r);
+	r.message_tag = 0;
+	rmcp_session_header_unpack_message_tag(d, &r);
+
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.message_tag, 64);
+	assert(r.message_tag == 64);
+}
+
+void t_rmcp_session_unpack_privilege_level()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t d[32*8];
+
+	r.max_privilege_level = 64;
+	rmcp_session_header_pack_privilege_level(d, &r);
+	r.max_privilege_level = 0;
+	rmcp_session_header_unpack_privilege_level(d, &r);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.max_privilege_level, 64);
+	assert(r.max_privilege_level == 64);
+}
+void t_rmcp_session_unpack_reserved()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t d[32*8];
+
+	r.reserved = 65535;
+	rmcp_session_header_pack_reserved(d, &r);
+	r.reserved = 0;
+	rmcp_session_header_unpack_reserved(d , &r);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.reserved, 65535);
+	assert(r.reserved == 65535);
+}
+void t_rmcp_session_unpack_session_id()
+{
+	printu(LOG_DEBUG, __func__);
+	struct rmcp_session r;
+	uint8_t d[32*8];
+
+	r.session_id = 4294967295;
+	rmcp_session_header_pack_session_id(d, &r);
+	r.session_id = 0;
+	rmcp_session_header_unpack_session_id(d, &r);
+	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.session_id, 4294967295);
+	assert(r.session_id == 4294967295);
+}
+
 void t_unpackl()
 {
 	/*
@@ -1476,29 +1588,15 @@ void test_unpack_functions()
 	t_rmcp_msg_header_unpack_reserved();
 	t_rmcp_msg_header_unpack_sequence_number();
 	t_rmcp_msg_header_unpack_message_class();
+
+	t_rmcp_session_unpack_message_tag();
+	t_rmcp_session_unpack_privilege_level();
+	t_rmcp_session_unpack_reserved();
+	t_rmcp_session_unpack_session_id();
 	t_unpackl();
 	t_unpackr();
 }
 
-void test_pack_functions()
-{
-	printf("\n");
-	printu(LOG_INFO, __func__);
-	t_asf_msg_data_pack_iana();
-	t_asf_msg_data_pack_oem();
-	t_asf_msg_data_pack_supported_entities();
-	t_asf_msg_data_pack_supported_interactions();
-
-	t_asf_msg_header_pack_iana();
-	t_asf_msg_header_pack_type();
-	t_asf_msg_header_pack_tag();
-	t_asf_msg_header_pack_reserved();
-
-	t_rmcp_msg_header_pack_version();
-	t_rmcp_msg_header_pack_reserved();
-	t_rmcp_msg_header_pack_sequence_number();
-	t_rmcp_msg_header_pack_message_class();
-}
 void test_set_functions()
 {
 	/*
@@ -1599,6 +1697,30 @@ void test_get_functions()
 	t_rmcp_session_get_confidentiality_payload_reserved_678();
 }
 
+void test_pack_functions()
+{
+	printf("\n");
+	printu(LOG_INFO, __func__);
+	t_asf_msg_data_pack_iana();
+	t_asf_msg_data_pack_oem();
+	t_asf_msg_data_pack_supported_entities();
+	t_asf_msg_data_pack_supported_interactions();
+
+	t_asf_msg_header_pack_iana();
+	t_asf_msg_header_pack_type();
+	t_asf_msg_header_pack_tag();
+	t_asf_msg_header_pack_reserved();
+
+	t_rmcp_msg_header_pack_version();
+	t_rmcp_msg_header_pack_reserved();
+	t_rmcp_msg_header_pack_sequence_number();
+	t_rmcp_msg_header_pack_message_class();
+
+	t_rmcp_session_pack_message_tag();
+	t_rmcp_session_pack_privilege_level();
+	t_rmcp_session_pack_reserved();
+	t_rmcp_session_pack_session_id();
+}
 int main(void)
 {
 	setprintmask(LOG_DEBUG);

@@ -102,12 +102,13 @@ enum {
 	RMCP_SESSION_CONFIDENTIALITY_PAYLOAD = RMCP_SESSION_INTEGRITY_PAYLOAD_OFFSET + RMCP_SESSION_INTEGRITY_PAYLOAD_SIZE,
 };
 
-enum { RMCP_SESSION_PRIVILEGE_UNDEFINED = 0,
-       RMCP_SESSION_PRIVILEGE_CALLBACK = 1,
-       RMCP_SESSION_PRIVILEGE_USER = 2,
-       RMCP_SESSION_PRIVILEGE_OPERATOR = 3,
-       RMCP_SESSION_PRIVILEGE_ADMINISTRATOR = 4,
-       RMCP_SESSION_PRIVILEGE_OEM = 5,
+enum {
+	RMCP_SESSION_PRIVILEGE_UNDEFINED = 0,
+	RMCP_SESSION_PRIVILEGE_CALLBACK = 1,
+	RMCP_SESSION_PRIVILEGE_USER = 2,
+	RMCP_SESSION_PRIVILEGE_OPERATOR = 3,
+	RMCP_SESSION_PRIVILEGE_ADMINISTRATOR = 4,
+	RMCP_SESSION_PRIVILEGE_OEM = 5,
 };
 
 struct rmcp_header {
@@ -241,4 +242,19 @@ void rmcp_session_set_confidentiality_payload_reserved_23(struct rmcp_session *r
 void rmcp_session_set_confidentiality_payload_length(struct rmcp_session *r, uint8_t i);
 void rmcp_session_set_confidentiality_payload_algorithm(struct rmcp_session *r, uint8_t i);
 void rmcp_session_set_confidentiality_payload_reserved_678(struct rmcp_session *r, uint32_t i);
+void rmcp_session_header_pack_message_tag(uint8_t *d, struct rmcp_session *r);
+void rmcp_session_header_pack_privilege_level(uint8_t *d, struct rmcp_session *r);
+void rmcp_session_header_pack_reserved(uint8_t *d, struct rmcp_session *r);
+void rmcp_session_header_pack_session_id(uint8_t *d, struct rmcp_session *r);
+void rmcp_session_header_pack_authentication_payload(uint8_t *d, struct rmcp_session *r);
+void rmcp_session_header_pack_integrity_payload(uint8_t *d, struct rmcp_session *r);
+void rmcp_session_header_pack_confidentiality_payload(uint8_t *d, struct rmcp_session *r);
+void rmcp_session_header_unpack_message_tag(uint8_t *d, struct rmcp_session *r);
+void rmcp_session_header_unpack_privilege_level(uint8_t *d, struct rmcp_session *r);
+void rmcp_session_header_unpack_reserved(uint8_t *d, struct rmcp_session *r);
+void rmcp_session_header_unpack_session_id(uint8_t *d, struct rmcp_session *r);
+void rmcp_session_header_unpack_authentication_payload(uint8_t *d, struct rmcp_session *r);
+void rmcp_session_header_unpack_integrity_payload(uint8_t *d, struct rmcp_session *r);
+void rmcp_session_header_unpack_confidentiality_payload(uint8_t *d, struct rmcp_session *r);
+
 #endif
