@@ -422,6 +422,11 @@ uint8_t rmcp_session_get_privilege_level_request(struct rmcp_session *r)
 	return r->max_privilege_level & 16;
 }
 
+uint8_t rmcp_session_get_reserved(struct rmcp_session *r)
+{
+	return r->reserved;
+}
+
 uint32_t rmcp_session_get_session_id(struct rmcp_session *r)
 {
 	return r->session_id;
@@ -757,7 +762,6 @@ void rmcp_session_header_pack_privilege_level(uint8_t *d, struct rmcp_session *r
 	packl(&(d)[RMCP_SESSION_MAX_PRIV_LEVEL_OFFSET], r->max_privilege_level, RMCP_SESSION_MAX_PRIV_LEVEL_SIZE);
 }
 
-
 void rmcp_session_header_pack_reserved(uint8_t *d, struct rmcp_session *r)
 {
 	packl(&(d)[RMCP_SESSION_RESERVED_OFFSET], r->reserved, RMCP_SESSION_RESERVED_SIZE);
@@ -793,7 +797,6 @@ void rmcp_session_header_unpack_privilege_level(uint8_t *d, struct rmcp_session 
 	r->max_privilege_level = unpackl(&(d)[RMCP_SESSION_MAX_PRIV_LEVEL_OFFSET], RMCP_SESSION_MAX_PRIV_LEVEL_SIZE);
 }
 
-
 void rmcp_session_header_unpack_reserved(uint8_t *d, struct rmcp_session *r)
 {
 	r->reserved = unpackl(&(d)[RMCP_SESSION_RESERVED_OFFSET], RMCP_SESSION_RESERVED_SIZE);
@@ -806,7 +809,8 @@ void rmcp_session_header_unpack_session_id(uint8_t *d, struct rmcp_session *r)
 
 void rmcp_session_header_unpack_authentication_payload(uint8_t *d, struct rmcp_session *r)
 {
-	r->authentication_payload = unpackl(&(d)[RMCP_SESSION_AUTHENTICATION_PAYLOAD_OFFSET], RMCP_SESSION_AUTHENTICATION_PAYLOAD_OFFSET);
+	r->authentication_payload =
+		unpackl(&(d)[RMCP_SESSION_AUTHENTICATION_PAYLOAD_OFFSET], RMCP_SESSION_AUTHENTICATION_PAYLOAD_OFFSET);
 }
 
 void rmcp_session_header_unpack_integrity_payload(uint8_t *d, struct rmcp_session *r)

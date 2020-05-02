@@ -151,7 +151,7 @@ void udp(uint8_t *d, uint8_t *r)
 	if ((sendto(fd, d, ASF_MSG_PING_LEN, 0, (struct sockaddr *)NULL, l) < 0) || errno)
 		goto out;
 
-	if ((recvfrom(fd, r, LONGEST, 0, (struct sockaddr *)NULL, NULL) < 0) || errno)
+	if ((recvfrom(fd, r, ASF_MSG_LONGEST, 0, (struct sockaddr *)NULL, NULL) < 0) || errno)
 		goto out;
 
 	return;
@@ -170,9 +170,9 @@ void req()
 	struct asf_header as;
 	struct asf_data ad;
 	uint8_t d[ASF_MSG_PING_LEN];
-	uint8_t ds[LONGEST];
+	uint8_t ds[ASF_MSG_LONGEST];
 	memset(d, '\0', ASF_MSG_PING_LEN);
-	memset(ds, '\0', LONGEST);
+	memset(ds, '\0', ASF_MSG_LONGEST);
 
 	rmcp_header_set(&r);
 	asf_header_set(&a);

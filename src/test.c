@@ -243,10 +243,10 @@ void t_asf_msg_data_pack_iana()
 void t_asf_msg_data_pack_oem()
 {
 	struct asf_data a;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	uint32_t i;
 
-	memset(d, '\0', LONGEST);
+	memset(d, '\0', ASF_MSG_LONGEST);
 	a.oem_defined = 4294967295;
 
 	printu(LOG_DEBUG, __func__);
@@ -260,10 +260,10 @@ void t_asf_msg_data_pack_oem()
 void t_asf_msg_data_pack_supported_entities()
 {
 	struct asf_data a;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	uint32_t i;
 
-	memset(d, '\0', LONGEST);
+	memset(d, '\0', ASF_MSG_LONGEST);
 	a.supported_entities = 255;
 
 	printu(LOG_DEBUG, __func__);
@@ -277,10 +277,10 @@ void t_asf_msg_data_pack_supported_entities()
 void t_asf_msg_data_pack_supported_interactions()
 {
 	struct asf_data a;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	uint32_t i;
 
-	memset(d, '\0', LONGEST);
+	memset(d, '\0', ASF_MSG_LONGEST);
 	a.supported_interactions = 255;
 
 	printu(LOG_DEBUG, __func__);
@@ -297,11 +297,11 @@ void t_asf_msg_data_unpack_iana()
 	*/
 	printu(LOG_DEBUG, __func__);
 	struct asf_data a;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	uint32_t i = 34480385;
 
 	a.iana_number = i;
-	memset(d, '\0', LONGEST);
+	memset(d, '\0', ASF_MSG_LONGEST);
 
 	asf_msg_data_pack_iana(d, &a);
 	a.iana_number = 0;
@@ -319,11 +319,11 @@ void t_asf_msg_data_unpack_oem()
 	*/
 	printu(LOG_DEBUG, __func__);
 	struct asf_data a;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	uint64_t i = 67305985;
 	a.oem_defined = i;
 
-	memset(d, '\0', LONGEST);
+	memset(d, '\0', ASF_MSG_LONGEST);
 
 	asf_msg_data_pack_oem(d, &a);
 	a.oem_defined = 0;
@@ -339,7 +339,7 @@ void t_asf_msg_data_unpack_supported_entities()
 	* 1 byte
 	*/
 	struct asf_data a;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	d[ASF_MSG_DATA_SUP_ENT_OFFSET] = 4;
 	printu(LOG_DEBUG, __func__);
 
@@ -410,10 +410,10 @@ void t_asf_msg_header_get_type()
 void t_asf_msg_header_pack_iana()
 {
 	struct asf_header a;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	uint32_t i;
 
-	memset(d, '\0', LONGEST);
+	memset(d, '\0', ASF_MSG_LONGEST);
 	a.iana_number = 4294967295;
 
 	printu(LOG_DEBUG, __func__);
@@ -427,10 +427,10 @@ void t_asf_msg_header_pack_iana()
 void t_asf_msg_header_pack_type()
 {
 	struct asf_header a;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	uint32_t i;
 
-	memset(d, '\0', LONGEST);
+	memset(d, '\0', ASF_MSG_LONGEST);
 	a.type = 255;
 
 	printu(LOG_DEBUG, __func__);
@@ -444,10 +444,10 @@ void t_asf_msg_header_pack_type()
 void t_asf_msg_header_pack_tag()
 {
 	struct asf_header a;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	uint32_t i;
 
-	memset(d, '\0', LONGEST);
+	memset(d, '\0', ASF_MSG_LONGEST);
 	a.tag = 255;
 
 	printu(LOG_DEBUG, __func__);
@@ -461,10 +461,10 @@ void t_asf_msg_header_pack_tag()
 void t_asf_msg_header_pack_data_length()
 {
 	struct asf_header a;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	uint32_t i;
 
-	memset(d, '\0', LONGEST);
+	memset(d, '\0', ASF_MSG_LONGEST);
 	a.data_length = 255;
 
 	printu(LOG_DEBUG, __func__);
@@ -478,10 +478,10 @@ void t_asf_msg_header_pack_data_length()
 void t_asf_msg_header_pack_reserved()
 {
 	struct asf_header a;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	uint32_t i;
 
-	memset(d, '\0', LONGEST);
+	memset(d, '\0', ASF_MSG_LONGEST);
 	a.reserved = 255;
 
 	printu(LOG_DEBUG, __func__);
@@ -495,12 +495,12 @@ void t_asf_msg_header_pack_reserved()
 void t_asf_msg_header_unpack_iana()
 {
 	struct asf_header a;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	uint32_t i = 4294967295;
 
 	printu(LOG_DEBUG, __func__);
 
-	memset(d, '\0', LONGEST);
+	memset(d, '\0', ASF_MSG_LONGEST);
 	a.iana_number = i;
 	asf_msg_header_pack_iana(d, &a);
 
@@ -514,12 +514,12 @@ void t_asf_msg_header_unpack_iana()
 void t_asf_msg_header_unpack_type()
 {
 	struct asf_header a;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	uint8_t i = 255;
 
 	printu(LOG_DEBUG, __func__);
 
-	memset(d, '\0', LONGEST);
+	memset(d, '\0', ASF_MSG_LONGEST);
 	a.type = i;
 	asf_msg_header_pack_type(d, &a);
 
@@ -533,12 +533,12 @@ void t_asf_msg_header_unpack_type()
 void t_asf_msg_header_unpack_tag()
 {
 	struct asf_header a;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	uint8_t i = 255;
 
 	printu(LOG_DEBUG, __func__);
 
-	memset(d, '\0', LONGEST);
+	memset(d, '\0', ASF_MSG_LONGEST);
 	a.tag = i;
 	asf_msg_header_pack_tag(d, &a);
 
@@ -552,12 +552,12 @@ void t_asf_msg_header_unpack_tag()
 void t_asf_msg_header_unpack_reserved()
 {
 	struct asf_header a;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	uint8_t i = 255;
 
 	printu(LOG_DEBUG, __func__);
 
-	memset(d, '\0', LONGEST);
+	memset(d, '\0', ASF_MSG_LONGEST);
 	a.reserved = i;
 	asf_msg_header_pack_reserved(d, &a);
 
@@ -571,12 +571,12 @@ void t_asf_msg_header_unpack_reserved()
 void t_asf_msg_header_unpack_data_length()
 {
 	struct asf_header a;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	uint8_t i = 255;
 
 	printu(LOG_DEBUG, __func__);
 
-	memset(d, '\0', LONGEST);
+	memset(d, '\0', ASF_MSG_LONGEST);
 	a.data_length = i;
 	asf_msg_header_pack_data_length(d, &a);
 
@@ -721,12 +721,12 @@ void t_rmcp_msg_header_get_version()
 void t_rmcp_msg_header_pack_version()
 {
 	struct rmcp_header r;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	uint8_t i;
 
 	printu(LOG_DEBUG, __func__);
 
-	memset(d, 1, LONGEST);
+	memset(d, 1, ASF_MSG_LONGEST);
 	r.version = 0;
 
 	rmcp_msg_header_pack_version(d, &r);
@@ -739,12 +739,12 @@ void t_rmcp_msg_header_pack_version()
 void t_rmcp_msg_header_pack_reserved()
 {
 	struct rmcp_header r;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	uint8_t i;
 
 	printu(LOG_DEBUG, __func__);
 
-	memset(d, 1, LONGEST);
+	memset(d, 1, ASF_MSG_LONGEST);
 	r.reserved = 255;
 
 	rmcp_msg_header_pack_reserved(d, &r);
@@ -757,12 +757,12 @@ void t_rmcp_msg_header_pack_reserved()
 void t_rmcp_msg_header_pack_sequence_number()
 {
 	struct rmcp_header r;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	uint8_t i;
 
 	printu(LOG_DEBUG, __func__);
 
-	memset(d, 0, LONGEST);
+	memset(d, 0, ASF_MSG_LONGEST);
 	r.sequence_number = 255;
 
 	rmcp_msg_header_pack_sequence_number(d, &r);
@@ -775,12 +775,12 @@ void t_rmcp_msg_header_pack_sequence_number()
 void t_rmcp_msg_header_pack_message_class()
 {
 	struct rmcp_header r;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	uint8_t i = 255;
 
 	printu(LOG_DEBUG, __func__);
 
-	memset(d, 1, LONGEST);
+	memset(d, 1, ASF_MSG_LONGEST);
 	r.message_class = i;
 
 	rmcp_msg_header_pack_message_class(d, &r);
@@ -794,12 +794,12 @@ void t_rmcp_msg_header_pack_message_class()
 void t_rmcp_msg_header_unpack_version()
 {
 	struct rmcp_header r;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	uint8_t i = 255;
 
 	printu(LOG_DEBUG, __func__);
 
-	memset(d, '\0', LONGEST);
+	memset(d, '\0', ASF_MSG_LONGEST);
 	r.version = i;
 	rmcp_msg_header_pack_version(d, &r);
 
@@ -813,12 +813,12 @@ void t_rmcp_msg_header_unpack_version()
 void t_rmcp_msg_header_unpack_reserved()
 {
 	struct rmcp_header r;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	uint8_t i = 255;
 
 	printu(LOG_DEBUG, __func__);
 
-	memset(d, '\0', LONGEST);
+	memset(d, '\0', ASF_MSG_LONGEST);
 	r.reserved = i;
 	rmcp_msg_header_pack_reserved(d, &r);
 
@@ -831,12 +831,12 @@ void t_rmcp_msg_header_unpack_reserved()
 void t_rmcp_msg_header_unpack_sequence_number()
 {
 	struct rmcp_header r;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	uint8_t i = 255;
 
 	printu(LOG_DEBUG, __func__);
 
-	memset(d, '\0', LONGEST);
+	memset(d, '\0', ASF_MSG_LONGEST);
 	r.sequence_number = i;
 	rmcp_msg_header_pack_sequence_number(d, &r);
 
@@ -849,12 +849,12 @@ void t_rmcp_msg_header_unpack_sequence_number()
 void t_rmcp_msg_header_unpack_message_class()
 {
 	struct rmcp_header r;
-	uint8_t d[LONGEST];
+	uint8_t d[ASF_MSG_LONGEST];
 	uint8_t i = 255;
 
 	printu(LOG_DEBUG, __func__);
 
-	memset(d, '\0', LONGEST);
+	memset(d, '\0', ASF_MSG_LONGEST);
 	r.message_class = i;
 	rmcp_msg_header_pack_message_class(d, &r);
 
@@ -1431,7 +1431,7 @@ void t_rmcp_session_pack_message_tag()
 {
 	printu(LOG_DEBUG, __func__);
 	struct rmcp_session r;
-	uint8_t d[32*8];
+	uint8_t d[32 * 8];
 	uint8_t i;
 
 	r.message_tag = 64;
@@ -1447,7 +1447,7 @@ void t_rmcp_session_pack_privilege_level()
 {
 	printu(LOG_DEBUG, __func__);
 	struct rmcp_session r;
-	uint8_t d[32*8];
+	uint8_t d[32 * 8];
 
 	r.max_privilege_level = 64;
 	rmcp_session_header_pack_privilege_level(d, &r);
@@ -1460,12 +1460,12 @@ void t_rmcp_session_pack_reserved()
 {
 	printu(LOG_DEBUG, __func__);
 	struct rmcp_session r;
-	uint8_t d[32*8];
+	uint8_t d[32 * 8];
 
 	r.reserved = 65535;
 	rmcp_session_header_pack_reserved(d, &r);
 	r.reserved = 0;
-	rmcp_session_header_unpack_reserved(d , &r);
+	rmcp_session_header_unpack_reserved(d, &r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.reserved, 65535);
 	assert(r.reserved == 65535);
 }
@@ -1473,7 +1473,7 @@ void t_rmcp_session_pack_session_id()
 {
 	printu(LOG_DEBUG, __func__);
 	struct rmcp_session r;
-	uint8_t d[32*8];
+	uint8_t d[32 * 8];
 
 	r.session_id = 4294967295;
 	rmcp_session_header_pack_session_id(d, &r);
@@ -1487,7 +1487,7 @@ void t_rmcp_session_unpack_message_tag()
 {
 	printu(LOG_DEBUG, __func__);
 	struct rmcp_session r;
-	uint8_t d[32*8];
+	uint8_t d[32 * 8];
 	uint8_t i;
 
 	r.message_tag = 64;
@@ -1503,7 +1503,7 @@ void t_rmcp_session_unpack_privilege_level()
 {
 	printu(LOG_DEBUG, __func__);
 	struct rmcp_session r;
-	uint8_t d[32*8];
+	uint8_t d[32 * 8];
 
 	r.max_privilege_level = 64;
 	rmcp_session_header_pack_privilege_level(d, &r);
@@ -1516,12 +1516,12 @@ void t_rmcp_session_unpack_reserved()
 {
 	printu(LOG_DEBUG, __func__);
 	struct rmcp_session r;
-	uint8_t d[32*8];
+	uint8_t d[32 * 8];
 
 	r.reserved = 65535;
 	rmcp_session_header_pack_reserved(d, &r);
 	r.reserved = 0;
-	rmcp_session_header_unpack_reserved(d , &r);
+	rmcp_session_header_unpack_reserved(d, &r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.reserved, 65535);
 	assert(r.reserved == 65535);
 }
@@ -1529,7 +1529,7 @@ void t_rmcp_session_unpack_session_id()
 {
 	printu(LOG_DEBUG, __func__);
 	struct rmcp_session r;
-	uint8_t d[32*8];
+	uint8_t d[32 * 8];
 
 	r.session_id = 4294967295;
 	rmcp_session_header_pack_session_id(d, &r);

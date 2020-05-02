@@ -12,7 +12,7 @@ librmcp
     :target: https://lgtm.com/projects/g/mattpallissard/librmcp/context:cpp
 
 
-A RMPC library based on the IPMI 2.0 spec.
+A RMCP library based on the IPMI 2.0 spec.
 
 Questions, comments,  concerns can be emailed to rmcp at pallissard dot net.
 
@@ -47,6 +47,8 @@ work
 | logging       | to do       | put some polish on the (internal only) debug loggin |
 +---------------+-------------+-----------------------------------------------------+
 | protocol      | to do       | maintain state, etc                                 |
++---------------+-------------+-----------------------------------------------------+
+| more robust testing | in progress| maintain state, etc                                 |
 +---------------+-------------+-----------------------------------------------------+
 | api           | to do       | standardize on public /private api                  |
 +---------------+-------------+-----------------------------------------------------+
