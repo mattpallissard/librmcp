@@ -19,7 +19,6 @@ void rmcp_header_print(struct rmcp_header *r)
 	printf("rmcp class tag:                    %u\n\n", rmcp_msg_header_get_class_tag(r));
 }
 
-
 void rmcp_header_set(struct rmcp_header *r)
 {
 	rmcp_msg_header_set_version(r);
@@ -45,18 +44,15 @@ void rmcp_header_unpack(uint8_t *d, struct rmcp_header *r)
 	rmcp_msg_header_unpack_message_class(d, r);
 }
 
-
 void rmcp_session_unpack(uint8_t *d, struct rmcp_session *r)
 {
-
-	rmcp_session_header_unpack_message_tag(d,  r);
-	rmcp_session_header_unpack_privilege_level(d,  r);
-	rmcp_session_header_unpack_reserved(d,  r);
-	rmcp_session_header_unpack_session_id(d,  r);
-	rmcp_session_header_unpack_authentication_payload(d,  r);
-	rmcp_session_header_unpack_integrity_payload(d,  r);
-	rmcp_session_header_unpack_confidentiality_payload(d,  r);
-
+	rmcp_session_header_unpack_message_tag(d, r);
+	rmcp_session_header_unpack_privilege_level(d, r);
+	rmcp_session_header_unpack_reserved(d, r);
+	rmcp_session_header_unpack_session_id(d, r);
+	rmcp_session_header_unpack_authentication_payload(d, r);
+	rmcp_session_header_unpack_integrity_payload(d, r);
+	rmcp_session_header_unpack_confidentiality_payload(d, r);
 }
 
 void rmcp_session_print(struct rmcp_session *r)
@@ -83,7 +79,6 @@ void rmcp_session_print(struct rmcp_session *r)
 	printf("confidentiality payload length:    %u\n", rmcp_session_get_confidentiality_payload_length(r));
 	printf("confidentiality payload algorithm: %u\n", rmcp_session_get_confidentiality_payload_algorithm(r));
 	printf("confidentiality reserved 678       %u\n\n", rmcp_session_get_confidentiality_payload_reserved_678(r));
-
 }
 
 void rmcp_session_set(struct rmcp_session *r)
@@ -113,16 +108,15 @@ void rmcp_session_set(struct rmcp_session *r)
 	rmcp_session_set_confidentiality_payload_reserved_678(r, 0);
 }
 
-
 void rmcp_session_pack(uint8_t *d, struct rmcp_session *r)
 {
-	rmcp_session_header_pack_message_tag(d,  r);
-	rmcp_session_header_pack_privilege_level(d,  r);
-	rmcp_session_header_pack_reserved(d,  r);
-	rmcp_session_header_pack_session_id(d,  r);
-	rmcp_session_header_pack_authentication_payload(d,  r);
-	rmcp_session_header_pack_integrity_payload(d,  r);
-	rmcp_session_header_pack_confidentiality_payload(d,  r);
+	rmcp_session_header_pack_message_tag(d, r);
+	rmcp_session_header_pack_privilege_level(d, r);
+	rmcp_session_header_pack_reserved(d, r);
+	rmcp_session_header_pack_session_id(d, r);
+	rmcp_session_header_pack_authentication_payload(d, r);
+	rmcp_session_header_pack_integrity_payload(d, r);
+	rmcp_session_header_pack_confidentiality_payload(d, r);
 }
 
 void udp(uint8_t *d, uint8_t *r)
@@ -160,7 +154,6 @@ int main(void)
 	struct rmcp_header rh;
 	struct rmcp_session rs;
 
-
 	uint8_t ds[RMCP_SESSION_LONGEST];
 	uint8_t dr[RMCP_SESSION_LONGEST];
 	memset(ds, '\0', RMCP_SESSION_LONGEST);
@@ -184,9 +177,6 @@ int main(void)
 	rmcp_header_unpack(dr, &rh);
 	rmcp_session_unpack(dr, &rs);
 
-
 	rmcp_session_set(&rs);
 	rmcp_session_print(&rs);
-
-
 }

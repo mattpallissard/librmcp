@@ -43,7 +43,6 @@ enum {
 	// 192 -> 255 =  OEM,  all other reserved
 };
 
-
 // p159
 struct ipmi_session_header {
 	uint8_t auth_type;
