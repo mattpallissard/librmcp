@@ -422,6 +422,11 @@ uint8_t rmcp_session_get_privilege_level_request(struct rmcp_session *r)
 	return r->max_privilege_level & 16;
 }
 
+uint8_t rmcp_session_get_reserved(struct rmcp_session *r)
+{
+	return r->reserved;
+}
+
 uint32_t rmcp_session_get_session_id(struct rmcp_session *r)
 {
 	return r->session_id;

@@ -27,6 +27,8 @@ endif(CODE_COVERAGE)
 add_executable(t_unit src/test.c)
 if(WITH_EXAMPLES)
   add_executable(print_ping src/print_ping.c)
+  add_executable(open_session src/open_session.c)
+  target_link_libraries(open_session rmcp)
   target_link_libraries(print_ping rmcp)
 endif(WITH_EXAMPLES)
 

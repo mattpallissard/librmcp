@@ -89,7 +89,7 @@ enum {
 	ASF_MSG_DATA_SUP_INT_SIZE = sizeof(uint8_t),
 	ASF_MSG_DATA_RESERVED_DATA_OFFSET = ASF_MSG_DATA_SUP_INT_OFFSET + ASF_MSG_DATA_SUP_INT_SIZE,
 	ASF_MSG_DATA_RESERVED_DATA_SIZE = sizeof(uint8_t) * 6,
-	LONGEST = ASF_MSG_DATA_RESERVED_DATA_OFFSET + ASF_MSG_DATA_RESERVED_DATA_SIZE,
+	ASF_MSG_LONGEST = ASF_MSG_DATA_RESERVED_DATA_OFFSET + ASF_MSG_DATA_RESERVED_DATA_SIZE,
 };
 enum {
 	/*
@@ -97,7 +97,8 @@ enum {
 	rcmp open session request data
 
 	*/
-	RMCP_SESSION_MESSAGE_TAG_OFFSET = 0,
+	RMCP_SESSION_MESSAGE_TAG_OFFSET = RMCP_MSG_HEADER_CLASS_OFFSET + RMCP_MSG_HEADER_CLASS_SIZE,
+
 	RMCP_SESSION_MESSAGE_TAG_SIZE = sizeof(uint8_t),
 	RMCP_SESSION_MAX_PRIV_LEVEL_OFFSET = RMCP_SESSION_MESSAGE_TAG_OFFSET + RMCP_SESSION_MESSAGE_TAG_SIZE,
 	RMCP_SESSION_MAX_PRIV_LEVEL_SIZE = sizeof(uint8_t),
@@ -110,6 +111,8 @@ enum {
 	RMCP_SESSION_INTEGRITY_PAYLOAD_OFFSET = RMCP_SESSION_AUTHENTICATION_PAYLOAD_OFFSET + RMCP_SESSION_AUTHENTICATION_PAYLOAD_SIZE,
 	RMCP_SESSION_INTEGRITY_PAYLOAD_SIZE = sizeof(uint64_t),
 	RMCP_SESSION_CONFIDENTIALITY_PAYLOAD = RMCP_SESSION_INTEGRITY_PAYLOAD_OFFSET + RMCP_SESSION_INTEGRITY_PAYLOAD_SIZE,
+	RMCP_SESSION_CONFIDENTIALITY_PAYLOAD_SIZE = sizeof(uint64_t),
+	RMCP_SESSION_LONGEST = RMCP_SESSION_CONFIDENTIALITY_PAYLOAD + RMCP_SESSION_CONFIDENTIALITY_PAYLOAD_SIZE,
 };
 
 enum {
@@ -159,10 +162,10 @@ enum {
 	authentication algorithms
 
 	*/
-	RMCP_AUTHENTICATION_ALGORITHM_RAKP_NONE,
-	RMCP_AUTHENTICATION_ALGORITHM_RAKP_HMAC_SHA1,
-	RMCP_AUTHENTICATION_ALGORITHM_RAKP_HMAC_MD5,
-	RMCP_AUTHENTICATION_ALGORITHM_RAKP_HMAK_SHA256,
+	RMCP_AUTHENTICATION_ALGORITHM_NONE,
+	RMCP_AUTHENTICATION_ALGORITHM_HMAC_SHA1,
+	RMCP_AUTHENTICATION_ALGORITHM_HMAC_MD5,
+	RMCP_AUTHENTICATION_ALGORITHM_HMAK_SHA256,
 };
 
 enum {
@@ -288,6 +291,7 @@ uint8_t rmcp_session_get_message_tag(struct rmcp_session *r);
 uint8_t rmcp_session_get_privilege_level_reserved(struct rmcp_session *r);
 uint8_t rmcp_session_get_privilege_level_request(struct rmcp_session *r);
 uint32_t rmcp_session_get_session_id(struct rmcp_session *r);
+uint8_t rmcp_session_get_reserved(struct rmcp_session *r);
 uint8_t rmcp_session_get_authentication_payload_type(struct rmcp_session *r);
 uint16_t rmcp_session_get_authentication_payload_reserved_23(struct rmcp_session *r);
 uint8_t rmcp_session_get_authentication_payload_length(struct rmcp_session *r);
