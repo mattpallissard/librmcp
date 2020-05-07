@@ -1432,12 +1432,12 @@ void t_rmcp_session_pack_message_tag()
 	printu(LOG_DEBUG, __func__);
 	struct rmcp_session r;
 	uint8_t d[32 * 8];
-	uint8_t i;
+	//uint8_t i;
 
 	r.message_tag = 64;
-	rmcp_session_header_pack_message_tag(d, &r);
+	rcmp_session_pack_message_tag(d, &r);
 	r.message_tag = 0;
-	rmcp_session_header_unpack_message_tag(d, &r);
+	rcmp_session_unpack_message_tag(d, &r);
 
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.message_tag, 64);
 	assert(r.message_tag == 64);
@@ -1450,9 +1450,9 @@ void t_rmcp_session_pack_privilege_level()
 	uint8_t d[32 * 8];
 
 	r.max_privilege_level = 64;
-	rmcp_session_header_pack_privilege_level(d, &r);
+	rcmp_session_pack_privilege_level(d, &r);
 	r.max_privilege_level = 0;
-	rmcp_session_header_unpack_privilege_level(d, &r);
+	rcmp_session_unpack_privilege_level(d, &r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.max_privilege_level, 64);
 	assert(r.max_privilege_level == 64);
 }
@@ -1463,9 +1463,9 @@ void t_rmcp_session_pack_reserved()
 	uint8_t d[32 * 8];
 
 	r.reserved = 65535;
-	rmcp_session_header_pack_reserved(d, &r);
+	rcmp_session_pack_reserved(d, &r);
 	r.reserved = 0;
-	rmcp_session_header_unpack_reserved(d, &r);
+	rcmp_session_unpack_reserved(d, &r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.reserved, 65535);
 	assert(r.reserved == 65535);
 }
@@ -1476,9 +1476,9 @@ void t_rmcp_session_pack_session_id()
 	uint8_t d[32 * 8];
 
 	r.session_id = 4294967295;
-	rmcp_session_header_pack_session_id(d, &r);
+	rcmp_session_pack_session_id(d, &r);
 	r.session_id = 0;
-	rmcp_session_header_unpack_session_id(d, &r);
+	rcmp_session_unpack_session_id(d, &r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.session_id, 4294967295);
 	assert(r.session_id == 4294967295);
 }
@@ -1488,12 +1488,12 @@ void t_rmcp_session_unpack_message_tag()
 	printu(LOG_DEBUG, __func__);
 	struct rmcp_session r;
 	uint8_t d[32 * 8];
-	uint8_t i;
+	//uint8_t i;
 
 	r.message_tag = 64;
-	rmcp_session_header_pack_message_tag(d, &r);
+	rcmp_session_pack_message_tag(d, &r);
 	r.message_tag = 0;
-	rmcp_session_header_unpack_message_tag(d, &r);
+	rcmp_session_unpack_message_tag(d, &r);
 
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.message_tag, 64);
 	assert(r.message_tag == 64);
@@ -1506,9 +1506,9 @@ void t_rmcp_session_unpack_privilege_level()
 	uint8_t d[32 * 8];
 
 	r.max_privilege_level = 64;
-	rmcp_session_header_pack_privilege_level(d, &r);
+	rcmp_session_pack_privilege_level(d, &r);
 	r.max_privilege_level = 0;
-	rmcp_session_header_unpack_privilege_level(d, &r);
+	rcmp_session_unpack_privilege_level(d, &r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.max_privilege_level, 64);
 	assert(r.max_privilege_level == 64);
 }
@@ -1519,9 +1519,9 @@ void t_rmcp_session_unpack_reserved()
 	uint8_t d[32 * 8];
 
 	r.reserved = 65535;
-	rmcp_session_header_pack_reserved(d, &r);
+	rcmp_session_pack_reserved(d, &r);
 	r.reserved = 0;
-	rmcp_session_header_unpack_reserved(d, &r);
+	rcmp_session_unpack_reserved(d, &r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.reserved, 65535);
 	assert(r.reserved == 65535);
 }
@@ -1532,9 +1532,9 @@ void t_rmcp_session_unpack_session_id()
 	uint8_t d[32 * 8];
 
 	r.session_id = 4294967295;
-	rmcp_session_header_pack_session_id(d, &r);
+	rcmp_session_pack_session_id(d, &r);
 	r.session_id = 0;
-	rmcp_session_header_unpack_session_id(d, &r);
+	rcmp_session_unpack_session_id(d, &r);
 	printu(LOG_DEBUG, "\t\tassert(%u == %u)", r.session_id, 4294967295);
 	assert(r.session_id == 4294967295);
 }
