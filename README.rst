@@ -2,20 +2,10 @@
 librmcp
 =======
 
-.. image:: https://travis-ci.org/mattpallissard/librmcp.svg?branch=master
-    :target: https://travis-ci.org/mattpallissard/librmcp
-
-.. image:: https://codecov.io/gh/mattpallissard/librmcp/branch/master/graph/badge.svg
-    :target: https://codecov.io/gh/mattpallissard/librmcp
-
-.. image:: https://img.shields.io/lgtm/grade/cpp/g/mattpallissard/librmcp.svg?logo=lgtm&logoWidth=18
-    :target: https://lgtm.com/projects/g/mattpallissard/librmcp/context:cpp
-
 
 A RMCP library based on the IPMI 2.0 spec.
 
-Questions, comments,  concerns can be emailed to rmcp at pallissard dot net.
-
+:G
 status
 ======
 
